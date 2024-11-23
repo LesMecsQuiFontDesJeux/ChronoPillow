@@ -59,19 +59,21 @@ func on_interact():
 	detect_interactable()
 	
 func detect_interactable():
-	var bodies = interaction_area.get_overlapping_bodies()
-	# Get closest interactable object
+	var bodies = interaction_area.get_overlapping_areas()
+
 	var closest_body = null
 	var closest_distance = 0
+	
 	for body in bodies:
 		if body.has_method("get_global_position"):
 			var distance = global_position.distance_to(body.get_global_position())
 			if closest_body == null or distance < closest_distance:
 				closest_body = body
 				closest_distance = distance
+
 	if closest_body:
-		if closest_body == $NPC:
-			closest_body.interact()
+		if closest_body.get_parent().has_method("on_interact"):
+			closest_body.get_parent().on_interact()
 
 func _physics_process(_delta):
 	get_input()

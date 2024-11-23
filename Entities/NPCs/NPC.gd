@@ -36,9 +36,9 @@ func play_animation(animation_name: String) -> void:
 	else:
 		animated_sprite.play("default")
 
-func show_dialog(dialog_key: String) -> void:
+func show_dialog() -> void:
 	
-	var formatted_dialog_key: String = dialog_key + "_" + str(dialog_progress)
+	var formatted_dialog_key: String = "KEY_" + npc_name +  "_" + str(dialog_progress)
 
 	var dialog: String = tr(formatted_dialog_key)
 
@@ -53,6 +53,9 @@ func show_dialog(dialog_key: String) -> void:
 
 	print(dialog)
 
+func on_interact() -> void:
+	show_dialog()
+	
 func _shift_camera_left() -> void:
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var tween: Tween = get_tree().create_tween()

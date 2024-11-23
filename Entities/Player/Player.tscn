@@ -9,7 +9,7 @@ size = Vector2(16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_imida"]
 radius = 24.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_l2bin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
