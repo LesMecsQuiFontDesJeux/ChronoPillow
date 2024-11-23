@@ -8,9 +8,9 @@ enum TimeOfDay {
 	Paused
 }
 
-const FULL_DAY_LENGTH: float = 100.0 / 10.0
-const MORNING_END: float = 25.0 / 10.0
-const DAY_END: float = 75.0 / 10.0
+const FULL_DAY_LENGTH: float = 100.0
+const MORNING_END: float = 25.0
+const DAY_END: float = 75.0
 
 const MORNING_COLOR: Color = Color(1.0, 0.6, 0.2)
 const DAY_COLOR: Color = Color(1.0, 1.0, 1.0)

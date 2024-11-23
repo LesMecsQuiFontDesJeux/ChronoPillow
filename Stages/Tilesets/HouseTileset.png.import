@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddbw348qae82m"
-path="res://.godot/imported/IdleEvilBouhtade.png-5860a4b308fe35b2da80dbdf68ddeb28.ctex"
+uid="uid://ds5olexh1yl2"
+path="res://.godot/imported/HouseTileset.png-eb44bd5c417781f8770bcca921f25ac6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/NPCs/Bouhtade/Art/IdleEvilBouhtade.png"
-dest_files=["res://.godot/imported/IdleEvilBouhtade.png-5860a4b308fe35b2da80dbdf68ddeb28.ctex"]
+source_file="res://Stages/Tilesets/HouseTileset.png"
+dest_files=["res://.godot/imported/HouseTileset.png-eb44bd5c417781f8770bcca921f25ac6.ctex"]
 
 [params]
 
