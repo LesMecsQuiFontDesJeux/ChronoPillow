@@ -1,12 +1,12 @@
 [gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://omhxc7k6yygn"]
 
-[ext_resource type="Texture2D" uid="uid://bapg5wrd10va1" path="res://Entities/Items/Rat/Art/Rat.png" id="1_668x7"]
+[ext_resource type="Texture2D" uid="uid://bapg5wrd10va1" path="res://Entities/Items/Rat/Art/Rat.png" id="1_sydmr"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_668x7")
+"texture": ExtResource("1_sydmr")
 }],
 "loop": true,
 "name": &"default",
