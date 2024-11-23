@@ -13,7 +13,6 @@ config_version=5
 config/name="TimeGame"
 config/version="0.0.1"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
-config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
