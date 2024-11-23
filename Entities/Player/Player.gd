@@ -7,6 +7,8 @@ var idle = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var interaction_area = $InteractionArea
 
+var picked_up_item: Item = null
+const PICKED_ITEM_LOCATION = Vector2(10_000, 10_000)
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction.normalized() * speed
@@ -24,7 +26,10 @@ func get_input():
 			facing = curr_facing
 			start_walk()
 	if Input.is_action_just_pressed("interact"):
-		on_interact()
+		interact()
+	if Input.is_action_just_pressed("pickup"):
+		print(picked_up_item)
+		pick_up()
 
 func play_animation(animation_name: String, stop: bool = false):
 	animated_sprite.play(animation_name)
@@ -32,7 +37,6 @@ func play_animation(animation_name: String, stop: bool = false):
 		animated_sprite.stop()
 
 func start_idle():
-	print("Idle")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down", true)
@@ -44,7 +48,6 @@ func start_idle():
 			play_animation("idle_right")
 
 func start_walk():
-	print("Walking")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down")
@@ -55,26 +58,71 @@ func start_walk():
 		Vector2.RIGHT:
 			play_animation("walk_right")
 			
-func on_interact():
+func interact():
 	print("Interacting with something")
-	detect_interactable()
-	
-func detect_interactable():
+	var entity = check_for_interactable()
+	print(entity)
+	if entity and entity.has_method("on_interact"):
+		entity.on_interact()
+	else:
+		print("No interactable found")
+
+func pick_up():
+	if picked_up_item == null:
+		print("Picking up item")
+		var entity = check_for_interactable("items")
+		print(entity, entity is Item)
+		if entity and entity is Item:
+			pick_up_item(entity)
+		else:
+			print("No item to pick up")
+	else:
+		drop_item()
+
+func check_for_interactable(group: String = ""):
 	var bodies = interaction_area.get_overlapping_areas()
 
 	var closest_body = null
 	var closest_distance = 0
-	
+
 	for body in bodies:
-		if body.has_method("get_global_position"):
+		print(body)
+		# Check if the body is in the specified group, or skip filtering if group is empty
+		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position"):
 			var distance = global_position.distance_to(body.get_global_position())
 			if closest_body == null or distance < closest_distance:
 				closest_body = body
 				closest_distance = distance
 
-	if closest_body:
-		if closest_body.get_parent().has_method("on_interact"):
-			closest_body.get_parent().on_interact()
+	if closest_body != null:
+		return closest_body.get_parent()
+	else:
+		return null
+
+
+
+func has_item():
+	return picked_up_item != null
+
+
+func pick_up_item(item: Item):
+	if picked_up_item == null:
+		picked_up_item = item
+		item.on_pickup()
+		item.reparent(self)
+		item.global_position = PICKED_ITEM_LOCATION
+		print("Picked up item: ", item.item_name)
+	else:
+		print("Already holding an item, swappping")
+		drop_item()
+		pick_up_item(item)
+func drop_item():
+	if picked_up_item != null:
+		picked_up_item.global_position = global_position
+		picked_up_item.reparent(get_parent())
+		picked_up_item.on_drop()
+		picked_up_item = null
+		print("Dropped item")
 
 func _physics_process(_delta):
 	get_input()
