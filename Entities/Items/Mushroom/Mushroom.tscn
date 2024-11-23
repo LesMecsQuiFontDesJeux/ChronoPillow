@@ -4,11 +4,10 @@
 [ext_resource type="Script" path="res://Entities/Items/Item.gd" id="1_ueit8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvd88"]
-radius = 315.715
+radius = 8.06226
 
 [node name="Mushroom" type="Sprite2D"]
 position = Vector2(-3, 0)
-scale = Vector2(0.038674, 0.038674)
 texture = ExtResource("1_pecnu")
 script = ExtResource("1_ueit8")
 item_name = "Mushroom"

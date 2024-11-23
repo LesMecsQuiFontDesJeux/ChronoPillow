@@ -24,7 +24,9 @@ script = ExtResource("1_l2bin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_veq6k")
-animation = &"walk_up"
+animation = &"walk_down"
+frame = 1
+frame_progress = 0.505217
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -41,6 +43,8 @@ position_smoothing_speed = 15.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_imida")
 
+[node name="ItemSlot" type="Node2D" parent="."]
+position = Vector2(0, 8)
 [node name="BloodCPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 100
