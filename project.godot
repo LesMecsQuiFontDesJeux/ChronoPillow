@@ -21,18 +21,6 @@ config/icon="res://icon.svg"
 
 window/vsync/vsync_mode=0
 
-[editor]
-
-naming/script_name_casing=1
-
-[internationalization]
-
-locale/translations=PackedStringArray("res://Localization/Translations.en.translation", "res://Localization/Translations.fr.translation")
-
-[physics]
-
-2d/default_gravity=0.0
-
 [dotnet]
 
 project/assembly_name="TimeGame"
@@ -50,6 +38,14 @@ interact={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/Translations.en.translation", "res://Localization/Translations.fr.translation")
+
+[physics]
+
+2d/default_gravity=0.0
 
 [rendering]
 
