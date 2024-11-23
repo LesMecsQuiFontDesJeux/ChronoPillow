@@ -37,6 +37,10 @@ locale/translations=PackedStringArray("res://Localization/Translations.en.transl
 
 project/assembly_name="TimeGame"
 
+[editor]
+
+naming/scene_name_casing=1
+
 [input]
 
 interact={

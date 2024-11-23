@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 400
+@export var speed = 200
 var facing = Vector2.DOWN
 var idle = true
 @onready var animated_sprite = $AnimatedSprite2D
@@ -17,37 +17,42 @@ func get_input():
 	if input_direction != Vector2.ZERO:
 		var curr_facing = Vector2(input_direction.x, input_direction.y).normalized().round()
 
-		if curr_facing != facing && curr_facing != Vector2.ZERO:
+		if (curr_facing != facing or idle) && curr_facing != Vector2.ZERO:
 			idle = false
 			facing = curr_facing
 			start_walk()
 	if Input.is_action_just_pressed("interact"):
 		on_interact()
 
+func play_animation(animation_name: String, stop: bool = false):
+	animated_sprite.play(animation_name)
+	if stop:
+		animated_sprite.stop()
+
 func start_idle():
 	print("Idle")
-	if facing == Vector2.DOWN:
-		animated_sprite.play("walk_down")
-		animated_sprite.stop()
-	elif facing == Vector2.UP:
-		animated_sprite.play("walk_up")
-		animated_sprite.stop()
-	elif facing == Vector2.LEFT:
-		animated_sprite.play("idle_left")
-	elif facing == Vector2.RIGHT:
-		animated_sprite.play("idle_right")
+	match facing:
+		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
+			play_animation("walk_down", true)
+		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
+			play_animation("walk_up", true)
+		Vector2.LEFT:
+			play_animation("idle_left")
+		Vector2.RIGHT:
+			play_animation("idle_right")
 
 func start_walk():
 	print("Walking")
-	if facing == Vector2.DOWN:
-		animated_sprite.play("walk_down")
-	elif facing == Vector2.UP:
-		animated_sprite.play("walk_up")
-	elif facing == Vector2.LEFT:
-		animated_sprite.play("walk_left")
-	elif facing == Vector2.RIGHT:
-		animated_sprite.play("walk_right")
-	
+	match facing:
+		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
+			play_animation("walk_down")
+		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
+			play_animation("walk_up")
+		Vector2.LEFT:
+			play_animation("walk_left")
+		Vector2.RIGHT:
+			play_animation("walk_right")
+			
 func on_interact():
 	print("Interacting with something")
 
