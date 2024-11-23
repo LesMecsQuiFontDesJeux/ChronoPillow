@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://tfl2f51pgg04"]
+
+[ext_resource type="Texture2D" uid="uid://bfm0exenutdwl" path="res://Entities/Items/Bucket/Art/Bucket.png" id="1_gk7ct"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gs51"]
+atlas = ExtResource("1_gk7ct")
+region = Rect2(0, 0, 388, 340)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wqtt"]
+atlas = ExtResource("1_gk7ct")
+region = Rect2(388, 0, 388, 340)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gs51")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wqtt")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]

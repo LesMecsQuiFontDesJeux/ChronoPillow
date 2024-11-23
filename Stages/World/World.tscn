@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=8 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
 [ext_resource type="PackedScene" uid="uid://dygfjnesoes6g" path="res://Entities/Player/Player.tscn" id="2_hpqvq"]
+[ext_resource type="Script" path="res://Stages/World/WaterNode.gd" id="4_v14f4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g6rk"]
 size = Vector2(27, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvx0h"]
 size = Vector2(25, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3lxo"]
+size = Vector2(80, 31.5)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -63,5 +67,15 @@ tile_map_data = PackedByteArray("AAA9ADcAAQAEAAAAAABBADcAAQAEAAAAAABAADwAAQAEAAA
 tile_set = ExtResource("1_j7ssu")
 
 [node name="Player" parent="." instance=ExtResource("2_hpqvq")]
-position = Vector2(1450, 500)
-speed = 125
+position = Vector2(842, 680)
+speed = 200
+
+[node name="WaterNode" type="Node2D" parent="."]
+position = Vector2(1, 2)
+script = ExtResource("4_v14f4")
+
+[node name="WaterArea" type="Area2D" parent="WaterNode" groups=["water"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterNode/WaterArea"]
+position = Vector2(1240, 512.25)
+shape = SubResource("RectangleShape2D_g3lxo")

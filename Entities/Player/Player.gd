@@ -6,9 +6,10 @@ var facing = Vector2.DOWN
 var idle = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var interaction_area = $InteractionArea
+@onready var item_slot = $ItemSlot
+
 
 var picked_up_item: Item = null
-const PICKED_ITEM_LOCATION = Vector2(10_000, 10_000)
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction.normalized() * speed
@@ -37,26 +38,43 @@ func play_animation(animation_name: String, stop: bool = false):
 		animated_sprite.stop()
 
 func start_idle():
+	print("Starting idle")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down", true)
+			item_slot.position = Vector2(0, 8)
+			item_slot.z_index = 1
 		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
 			play_animation("walk_up", true)
+			item_slot.position = Vector2(0, -8)
+			item_slot.z_index = -1
 		Vector2.LEFT:
 			play_animation("idle_left")
+			item_slot.position = Vector2(-8, 0)
+			item_slot.z_index = 1
 		Vector2.RIGHT:
 			play_animation("idle_right")
-
+			item_slot.position = Vector2(8, 0)
+			item_slot.z_index = 1
 func start_walk():
+	print("Starting walk")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
-			play_animation("walk_down")
+			play_animation("walk_down", true)
+			item_slot.position = Vector2(0, 8)
+			item_slot.z_index = 1
 		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
-			play_animation("walk_up")
+			play_animation("walk_up", true)
+			item_slot.position = Vector2(0, -8)
+			item_slot.z_index = -1
 		Vector2.LEFT:
-			play_animation("walk_left")
+			play_animation("idle_left")
+			item_slot.position = Vector2(-8, 0)
+			item_slot.z_index = 1
 		Vector2.RIGHT:
-			play_animation("walk_right")
+			play_animation("idle_right")
+			item_slot.position = Vector2(8, 0)
+			item_slot.z_index = 1
 			
 func interact():
 	print("Interacting with something")
@@ -86,9 +104,13 @@ func check_for_interactable(group: String = ""):
 	var closest_distance = 0
 
 	for body in bodies:
-		print(body)
 		# Check if the body is in the specified group, or skip filtering if group is empty
 		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position"):
+			if body.get_parent():
+				if body.get_parent().get_parent():
+					if body.get_parent().get_parent().is_in_group("held"):
+						continue
+			print(body, body.get_parent().get_parent())
 			var distance = global_position.distance_to(body.get_global_position())
 			if closest_body == null or distance < closest_distance:
 				closest_body = body
@@ -104,13 +126,16 @@ func check_for_interactable(group: String = ""):
 func has_item():
 	return picked_up_item != null
 
+func get_item():
+	return picked_up_item
 
 func pick_up_item(item: Item):
 	if picked_up_item == null:
 		picked_up_item = item
 		item.on_pickup()
-		item.reparent(self)
-		item.global_position = PICKED_ITEM_LOCATION
+		item.reparent(item_slot)
+		item.add_to_group("held")
+		item.position = Vector2.ZERO
 		print("Picked up item: ", item.item_name)
 	else:
 		print("Already holding an item, swappping")
@@ -119,6 +144,7 @@ func pick_up_item(item: Item):
 func drop_item():
 	if picked_up_item != null:
 		picked_up_item.global_position = global_position
+		picked_up_item.remove_from_group("held")
 		picked_up_item.reparent(get_parent())
 		picked_up_item.on_drop()
 		picked_up_item = null

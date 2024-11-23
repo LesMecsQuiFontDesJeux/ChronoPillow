@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvnv4npmrkv78"]
+
+[ext_resource type="SpriteFrames" uid="uid://tfl2f51pgg04" path="res://Entities/Items/Bucket/Data/Bucket.tres" id="1_tq82c"]
+[ext_resource type="Script" path="res://Entities/Items/Bucket/Bucket.gd" id="2_ljmhp"]
+
+[node name="Bucket" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_tq82c")
+script = ExtResource("2_ljmhp")
