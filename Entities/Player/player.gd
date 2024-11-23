@@ -4,6 +4,7 @@ extends CharacterBody2D
 var facing = Vector2.DOWN
 var idle = true
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var interaction_area = $InteractionArea
 
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -55,6 +56,22 @@ func start_walk():
 			
 func on_interact():
 	print("Interacting with something")
+	detect_interactable()
+	
+func detect_interactable():
+	var bodies = interaction_area.get_overlapping_bodies()
+	# Get closest interactable object
+	var closest_body = null
+	var closest_distance = 0
+	for body in bodies:
+		if body.has_method("get_global_position"):
+			var distance = global_position.distance_to(body.get_global_position())
+			if closest_body == null or distance < closest_distance:
+				closest_body = body
+				closest_distance = distance
+	if closest_body:
+		if closest_body == $NPC:
+			closest_body.interact()
 
 func _physics_process(_delta):
 	get_input()
