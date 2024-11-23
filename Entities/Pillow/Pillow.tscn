@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bns8jne77h03b"]
+
+[ext_resource type="Script" path="res://Entities/Pillow/Pillow.gd" id="1_wevb5"]
+
+[node name="Pillow" type="Sprite2D" groups=["pillow"]]
+script = ExtResource("1_wevb5")
