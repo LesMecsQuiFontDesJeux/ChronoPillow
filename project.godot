@@ -12,14 +12,14 @@ config_version=5
 
 config/name="TimeGame"
 config/version="0.0.1"
-run/main_scene="res://Stages/World/World.tscn"
+run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://Common/Game Manager/GameManager.gd"
+GameManager="*res://Common/GameManager/GameManager.gd"
 
 [display]
 

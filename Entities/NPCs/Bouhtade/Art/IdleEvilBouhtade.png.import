@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n6wvgs7epofp"
-path="res://.godot/imported/pont.png-ddbfc4bb79d6dc2d0746a582f0219644.ctex"
+uid="uid://cgrtu1nq7dnlc"
+path="res://.godot/imported/IdleEvilBouhtade.png-5860a4b308fe35b2da80dbdf68ddeb28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stages/pont.png"
-dest_files=["res://.godot/imported/pont.png-ddbfc4bb79d6dc2d0746a582f0219644.ctex"]
+source_file="res://Entities/NPCs/Bouhtade/Art/IdleEvilBouhtade.png"
+dest_files=["res://.godot/imported/IdleEvilBouhtade.png-5860a4b308fe35b2da80dbdf68ddeb28.ctex"]
 
 [params]
 

@@ -1,18 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://dygfjnesoes6g"]
+[gd_scene load_steps=7 format=3 uid="uid://dygfjnesoes6g"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_l2bin"]
 [ext_resource type="SpriteFrames" uid="uid://c3kf7gpg36o0j" path="res://Entities/Player/Data/AnimationsPlayer.tres" id="2_veq6k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h347m"]
 radius = 3.0
-height = 16.0
+height = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_imida"]
 radius = 24.0
 
+[sub_resource type="Gradient" id="Gradient_omp7t"]
+offsets = PackedFloat32Array(0, 0.0788732)
+colors = PackedColorArray(1, 0, 0, 1, 0.67451, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jxeg2"]
+gradient = SubResource("Gradient_omp7t")
+width = 2
+height = 2
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_l2bin")
-speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_veq6k")
@@ -37,3 +45,14 @@ shape = SubResource("CircleShape2D_imida")
 
 [node name="ItemSlot" type="Node2D" parent="."]
 position = Vector2(0, 8)
+[node name="BloodCPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.5
+explosiveness = 0.2
+texture = SubResource("GradientTexture2D_jxeg2")
+spread = 180.0
+gravity = Vector2(0, 150)
+initial_velocity_max = 50.0
+
+[connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]

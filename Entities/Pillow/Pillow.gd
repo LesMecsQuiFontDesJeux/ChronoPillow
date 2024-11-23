@@ -15,8 +15,8 @@ func _ready() -> void:
 func get_stored_item_name():
 	return stored_item_name
 
-func set_stored_item_name(name: String):
-	stored_item_name = name
+func set_stored_item_name(item_name: String):
+	stored_item_name = item_name
 
 func on_interact():
 	"""
@@ -37,23 +37,23 @@ func on_interact():
 			store_item(item)
 	else:
 		if stored_item_name != null:
-			var item : Item = retrieve_item()
+			var item: Item = retrieve_item()
 			item.position = Vector2.ZERO
 			sprite.global_position.y += 10
-		else:	
+		else:
 			print("No item to pick up")
 
 func store_item(item: Item):
 	stored_item_name = item.item_name
 	item.on_drop()
-	item.queue_free()
+	item.call_deferred("free")
 
 func retrieve_item() -> Item:
-	var scene: PackedScene = ResourceLoader.load("res://Entities/Items/"+stored_item_name+"/"+stored_item_name+".tscn")
+	var scene: PackedScene = ResourceLoader.load("res://Entities/Items/" + stored_item_name + "/" + stored_item_name + ".tscn")
 	var item: Item = scene.instantiate()
 	item_slot.add_child(item)
 	stored_item_name = null
 	return item
 
-func _on_item_slot_child_exiting_tree(node: Node) -> void:
+func _on_item_slot_child_exiting_tree(_node: Node) -> void:
 	sprite.global_position.y -= 10
