@@ -1,7 +1,6 @@
 extends Node
 
 var time_manager: TimeManager
-
 var day: int = 0
 var stored_item_name = null
 
@@ -23,7 +22,7 @@ func start_day(first_day: bool = false) -> void:
 		pass
 		
 	if not first_day and stored_item_name != null:
-		world.get_pillow().set_stored_item_name(stored_item_name)
+		pillow.set_stored_item_name(stored_item_name)
 
 	time_manager.start_day()
 	get_tree().get_root().add_child.call_deferred(world)

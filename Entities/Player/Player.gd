@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@export var speed = 200
+@export var speed = 125
 var facing = Vector2.DOWN
 var idle = true
 @onready var animated_sprite = $AnimatedSprite2D

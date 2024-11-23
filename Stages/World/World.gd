@@ -14,3 +14,6 @@ func update_lighting(time_of_day: TimeManager.TimeOfDay) -> void:
 			directional_light.color = TimeManager.DAY_COLOR
 		TimeManager.TimeOfDay.Night:
 			directional_light.color = TimeManager.NIGHT_COLOR
+
+func get_player() -> Player:
+	return get_node("Player")
