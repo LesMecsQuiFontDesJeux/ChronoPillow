@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br572o1h4qbyy" path="res://Stages/Tilesets/CaveTileset.png" id="2_l1q6j"]
 [ext_resource type="Texture2D" uid="uid://dwm1uk6r6qavh" path="res://Stages/Tilesets/GraveyardTileset.png" id="3_g2b4f"]
 [ext_resource type="Texture2D" uid="uid://cnweaes4cuxac" path="res://Stages/Tilesets/Bridge.png" id="4_has67"]
-[ext_resource type="Texture2D" uid="uid://cicblwh3viham" path="res://Stages/Tilesets/myhouse.wad.png" id="4_ugoc1"]
+[ext_resource type="Texture2D" uid="uid://b5hybcujd0kkk" path="res://Stages/Tilesets/House.png" id="5_6b4lr"]
 [ext_resource type="Texture2D" uid="uid://ds5olexh1yl2" path="res://Stages/Tilesets/HouseTileset.png" id="6_quqfh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khj16"]
@@ -202,7 +202,7 @@ texture = ExtResource("4_has67")
 5:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vljqa"]
-texture = ExtResource("4_ugoc1")
+texture = ExtResource("5_6b4lr")
 3:0/0 = 0
 4:0/0 = 0
 2:1/0 = 0
