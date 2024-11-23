@@ -17,3 +17,18 @@ func update_lighting(time_of_day: TimeManager.TimeOfDay) -> void:
 
 func get_player() -> Player:
 	return get_node("Player")
+
+func get_npcs_by_name(name: String) -> NPC:
+	var npcs = get_tree().get_nodes_in_group("npcs")
+	for npc in npcs:
+		if npc.npc_name == name:
+			return npc
+	return null
+
+func circular_fade_in() -> void:
+	var fade_in: AnimationPlayer = $Transitions/CircularFadeInOut/AnimationPlayer
+	fade_in.play("fade_in")
+
+func circular_fade_out() -> void:
+	var fade_out: AnimationPlayer = $Transitions/CircularFadeInOut/AnimationPlayer
+	fade_out.play("fade_out")

@@ -46,7 +46,7 @@ func on_interact():
 func store_item(item: Item):
 	stored_item_name = item.item_name
 	item.on_drop()
-	item.queue_free()
+	item.call_deferred("free")
 
 func retrieve_item() -> Item:
 	var scene: PackedScene = ResourceLoader.load("res://Entities/Items/" + stored_item_name + "/" + stored_item_name + ".tscn")

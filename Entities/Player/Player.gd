@@ -1,11 +1,21 @@
 class_name Player
 extends CharacterBody2D
 
+signal died
+
 @export var speed = 125
 var facing = Vector2.DOWN
 var idle = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var interaction_area = $InteractionArea
+var can_move = true
+
+enum PlayerLocation {
+	Plain,
+	Graveyard
+}
+
+var player_location: PlayerLocation = PlayerLocation.Plain
 
 var picked_up_item: Item = null
 const PICKED_ITEM_LOCATION = Vector2(10_000, 10_000)
@@ -100,7 +110,6 @@ func check_for_interactable(group: String = ""):
 		return null
 
 
-
 func has_item():
 	return picked_up_item != null
 
@@ -125,5 +134,24 @@ func drop_item():
 		print("Dropped item")
 
 func _physics_process(_delta):
-	get_input()
-	move_and_slide()
+	if can_move:
+		get_input()
+		move_and_slide()
+
+
+func _on_interaction_area_area_entered(area: Area2D) -> void:
+	var world = get_node("/root/World")
+	if world == null:
+		return
+	if area.name == "GraveyardArea2D":
+		var bouhtade = world.get_npcs_by_name("Bouhtade")
+		bouhtade.in_graveyard = true
+		player_location = PlayerLocation.Graveyard
+	elif area.name == "PlainArea2D":
+		player_location = PlayerLocation.Plain
+
+func die_from_bouhtade():
+	can_move = false
+	var particles: CPUParticles2D = $BloodCPUParticles2D
+	particles.emitting = true
+	emit_signal("died")

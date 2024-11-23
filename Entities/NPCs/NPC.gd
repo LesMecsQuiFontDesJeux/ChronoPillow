@@ -11,10 +11,14 @@ var dialog_progress: float = 0
 var dialog_indicator_sprite: AnimatedSprite2D
 var dialog_window: Control
 var player: Player
+var world: World
+
+var default_position: Vector2
 
 func _enter_tree() -> void:
-	var world: World = get_node("/root/World")
+	world = get_node("/root/World")
 	player = world.get_player()
+	default_position = global_transform.origin
 
 func _ready() -> void:
 	add_to_group("npcs")
@@ -50,6 +54,11 @@ func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float =
 		animated_sprite.flip_h = true
 	else:
 		animated_sprite.flip_h = false
+
+func go_to_default_position(delta: float, lerp_factor: float = 0.5) -> void:
+	var direction = default_position - global_transform.origin
+	var target_position = global_transform.origin + direction.normalized() * speed * delta
+	global_transform.origin = global_transform.origin.lerp(target_position, lerp_factor)
 
 func play_animation(animation_name: String) -> void:
 	if animated_sprite.sprite_frames.has_animation(animation_name):
