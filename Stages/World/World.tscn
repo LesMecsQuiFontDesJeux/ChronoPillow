@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=8 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
 [ext_resource type="PackedScene" uid="uid://dygfjnesoes6g" path="res://Entities/Player/Player.tscn" id="2_hpqvq"]
+[ext_resource type="PackedScene" uid="uid://budpcbklr8o1v" path="res://Entities/Pillow/Pillow.tscn" id="4_7jxjd"]
+[ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="5_vqdt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g6rk"]
 size = Vector2(27, 46)
@@ -46,3 +48,9 @@ tile_set = ExtResource("1_j7ssu")
 [node name="Player" parent="." instance=ExtResource("2_hpqvq")]
 position = Vector2(841, 680)
 speed = 200
+
+[node name="Pillow" parent="." instance=ExtResource("4_7jxjd")]
+position = Vector2(639, 577)
+
+[node name="Mushroom" parent="." instance=ExtResource("5_vqdt3")]
+position = Vector2(553, 600)

@@ -3,7 +3,7 @@ extends Node
 var time_manager: TimeManager
 
 var day: int = 0
-var stored_item: Item
+var stored_item_name = null
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -16,12 +16,14 @@ func start_game() -> void:
 func start_day(first_day: bool = false) -> void:
 	var new_world: PackedScene = load("res://Stages/World/World.tscn")
 	var world: World = new_world.instantiate()
+	var pillow: Pillow = world.get_pillow()
 
-	# if first_day:
-		# add the letter under the pillow
-
-	# if not first_day:
-		# world.get_pillow().set_stored_item(stored_item)
+	if first_day:
+		#pillow.set_stored_item_name("")
+		pass
+		
+	if not first_day and stored_item_name != null:
+		world.get_pillow().set_stored_item_name(stored_item_name)
 
 	time_manager.start_day()
 	get_tree().get_root().add_child.call_deferred(world)
@@ -32,8 +34,8 @@ func end_day(player_killed: bool = false) -> void:
 	var world: World = get_node("/root/World")
 	# var player: Player = world.get_player()
 	
-	# if not player_killed:
-		# stored_item = world.get_pillow().get_stored_item().duplicate()
+	if not player_killed:
+		stored_item_name = world.get_pillow().get_stored_item_name()
 
 	# if player_killed:
 		# ????
@@ -49,12 +51,5 @@ func end_day(player_killed: bool = false) -> void:
 	start_day()
 
 func _physics_process(_delta):
-	var directional_light: DirectionalLight2D = get_node("/root/World/DirectionalLight2D")
-	var time_of_day: TimeManager.TimeOfDay = time_manager.get_day_state()
-
-	if time_of_day == TimeManager.TimeOfDay.Morning:
-		directional_light.color = time_manager.MORNING_COLOR
-	elif time_of_day == TimeManager.TimeOfDay.Day:
-		directional_light.color = time_manager.DAY_COLOR
-	elif time_of_day == TimeManager.TimeOfDay.Night:
-		directional_light.color = time_manager.NIGHT_COLOR
+	var world: World = get_node("/root/World")
+	world.update_lighting(time_manager.get_day_state())
