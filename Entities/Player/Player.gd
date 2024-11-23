@@ -60,30 +60,33 @@ func start_walk():
 	print("Starting walk")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
-			play_animation("walk_down", true)
+			play_animation("walk_down")
 			item_slot.position = Vector2(0, 8)
 			item_slot.z_index = 1
 		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
-			play_animation("walk_up", true)
+			play_animation("walk_up")
 			item_slot.position = Vector2(0, -8)
 			item_slot.z_index = -1
 		Vector2.LEFT:
-			play_animation("idle_left")
+			play_animation("walk_left")
 			item_slot.position = Vector2(-8, 0)
 			item_slot.z_index = 1
 		Vector2.RIGHT:
-			play_animation("idle_right")
+			play_animation("walk_right")
 			item_slot.position = Vector2(8, 0)
 			item_slot.z_index = 1
 			
 func interact():
 	print("Interacting with something")
-	var entity = check_for_interactable()
-	print(entity)
-	if entity and entity.has_method("on_interact"):
-		entity.on_interact()
+	if (has_item() and picked_up_item.is_in_group("interactable_held")):
+		picked_up_item.on_interact()
 	else:
-		print("No interactable found")
+		var entity = check_for_interactable()
+		print(entity)
+		if entity and entity.has_method("on_interact"):
+			entity.on_interact()
+		else:
+			print("No interactable found")
 
 func pick_up():
 	if picked_up_item == null:
@@ -104,19 +107,22 @@ func check_for_interactable(group: String = ""):
 	var closest_distance = 0
 
 	for body in bodies:
+		print(body, body.get_parent())
 		# Check if the body is in the specified group, or skip filtering if group is empty
 		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position"):
 			if body.get_parent():
+				if body.get_parent().is_in_group("held"):
+					continue
 				if body.get_parent().get_parent():
 					if body.get_parent().get_parent().is_in_group("held"):
 						continue
-			print(body, body.get_parent().get_parent())
 			var distance = global_position.distance_to(body.get_global_position())
 			if closest_body == null or distance < closest_distance:
 				closest_body = body
 				closest_distance = distance
 
 	if closest_body != null:
+		print("Found closest body: ", closest_body.get_parent())
 		return closest_body.get_parent()
 	else:
 		return null

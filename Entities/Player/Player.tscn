@@ -17,7 +17,8 @@ speed = 100
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_veq6k")
 animation = &"walk_down"
-frame_progress = 0.923482
+frame = 1
+frame_progress = 0.505217
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

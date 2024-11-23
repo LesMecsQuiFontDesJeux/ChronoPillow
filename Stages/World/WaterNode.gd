@@ -17,4 +17,5 @@ func on_interact():
 	var player: Player = get_tree().get_nodes_in_group("player")[0]
 	if player.has_item() and player.get_item() is Bucket:
 		var item: Item = player.get_item()
+		item.filled = true
 		item.animation = "full"

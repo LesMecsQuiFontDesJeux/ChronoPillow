@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://Entities/Items/Item.gd" id="1_uvniw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_drpda"]
-radius = 248.453
+radius = 9.0
 
 [node name="Rat" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_ksvdu")
 script = ExtResource("1_uvniw")
+item_name = "Rat"
 
 [node name="Area2D" type="Area2D" parent="."]
 

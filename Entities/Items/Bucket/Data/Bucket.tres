@@ -2,27 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://bfm0exenutdwl" path="res://Entities/Items/Bucket/Art/Bucket.png" id="1_gk7ct"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gs51"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmc8f"]
 atlas = ExtResource("1_gk7ct")
-region = Rect2(0, 0, 388, 340)
+region = Rect2(0, 0, 16, 15)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0wqtt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1hqi"]
 atlas = ExtResource("1_gk7ct")
-region = Rect2(388, 0, 388, 340)
+region = Rect2(0, 15, 16, 15)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gs51")
+"texture": SubResource("AtlasTexture_fmc8f")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0wqtt")
+"texture": SubResource("AtlasTexture_b1hqi")
 }],
 "loop": true,
 "name": &"full",
