@@ -10,6 +10,15 @@ extends CharacterBody2D
 var dialog_progress: float = 0
 var dialog_indicator_sprite: AnimatedSprite2D
 var dialog_window: Control
+var player: Player
+var world: World
+
+var default_position: Vector2
+
+func _enter_tree() -> void:
+	world = get_node("/root/World")
+	player = world.get_player()
+	default_position = global_transform.origin
 
 func _ready() -> void:
 	add_to_group("npcs")
@@ -27,9 +36,29 @@ func _create_dialog_indicator() -> void:
 func _create_dialog_window() -> void:
 	pass
 
-func move(direction: Vector2) -> void:
-	velocity = direction * speed
+func move(move_velocity: Vector2) -> void:
+	velocity = move_velocity
 	move_and_slide()
+
+func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float = 30) -> void:
+	var direction = player.global_transform.origin - global_transform.origin
+	var distance = direction.length()
+
+	if distance < min_distance:
+		return
+	
+	var target_position = global_transform.origin + direction.normalized() * speed * delta
+	global_transform.origin = global_transform.origin.lerp(target_position, lerp_factor)
+
+	if direction.x < 0:
+		animated_sprite.flip_h = true
+	else:
+		animated_sprite.flip_h = false
+
+func go_to_default_position(delta: float, lerp_factor: float = 0.5) -> void:
+	var direction = default_position - global_transform.origin
+	var target_position = global_transform.origin + direction.normalized() * speed * delta
+	global_transform.origin = global_transform.origin.lerp(target_position, lerp_factor)
 
 func play_animation(animation_name: String) -> void:
 	if animated_sprite.sprite_frames.has_animation(animation_name):
@@ -39,7 +68,7 @@ func play_animation(animation_name: String) -> void:
 
 func show_dialog() -> void:
 	
-	var formatted_dialog_key: String = "KEY_" + npc_name +  "_" + str(dialog_progress)
+	var formatted_dialog_key: String = "KEY_" + npc_name + "_" + str(dialog_progress)
 
 	var dialog: String = tr(formatted_dialog_key)
 
