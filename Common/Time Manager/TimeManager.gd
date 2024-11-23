@@ -8,9 +8,13 @@ enum TimeOfDay {
 	Paused
 }
 
-const FULL_DAY_LENGTH: float = 10.0
+const FULL_DAY_LENGTH: float = 100.0
 const MORNING_END: float = 25.0
 const DAY_END: float = 75.0
+
+const MORNING_COLOR: Color = Color(1.0, 0.6, 0.2)
+const DAY_COLOR: Color = Color(1.0, 1.0, 1.0)
+const NIGHT_COLOR: Color = Color(0.2, 0.2, 0.2)
 
 var timer: Timer
 
@@ -55,3 +59,6 @@ func get_time_left() -> float:
 
 func get_time_passed() -> float:
 	return FULL_DAY_LENGTH - timer.get_time_left()
+
+func get_normalized_time_passed() -> float:
+	return get_time_passed() / FULL_DAY_LENGTH
