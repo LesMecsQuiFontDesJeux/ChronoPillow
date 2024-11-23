@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://boefl2ofegdxx"]
+
+[ext_resource type="Texture2D" uid="uid://doj6cqe04crgt" path="res://Entities/Cauldron/Art/Cauldron.png" id="1_4hygy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yk4k"]
+atlas = ExtResource("1_4hygy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15kg7"]
+atlas = ExtResource("1_4hygy")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yk4k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15kg7")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]
