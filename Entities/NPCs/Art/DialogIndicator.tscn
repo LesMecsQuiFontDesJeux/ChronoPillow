@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://byanvfmw45oto"]
+
+[ext_resource type="Texture2D" uid="uid://dixbq2jws7ojx" path="res://Entities/NPCs/Art/DialogIndicator.png" id="1_7pch5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ninbe"]
+atlas = ExtResource("1_7pch5")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwnt0"]
+atlas = ExtResource("1_7pch5")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8vtv"]
+atlas = ExtResource("1_7pch5")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf2vf"]
+atlas = ExtResource("1_7pch5")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xl6o0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ninbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwnt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8vtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf2vf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="DialogIndicator" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_xl6o0")
+frame_progress = 0.242847

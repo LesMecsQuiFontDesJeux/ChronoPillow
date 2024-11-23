@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbco70enkxmym"]
+
+[ext_resource type="Script" path="res://Common/Time Manager/TimeManager.gd" id="1_xhryl"]
+
+[node name="TimeManger" type="Node"]
+script = ExtResource("1_xhryl")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 42.87
