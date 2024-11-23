@@ -12,6 +12,7 @@ var dialog_indicator_sprite: AnimatedSprite2D
 var dialog_window: Control
 
 func _ready() -> void:
+	add_to_group("npcs")
 	_create_dialog_indicator()
 	_create_dialog_window()
 	play_animation("default")
