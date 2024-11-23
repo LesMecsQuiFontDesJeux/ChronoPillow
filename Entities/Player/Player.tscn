@@ -11,6 +11,7 @@ radius = 24.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_l2bin")
+speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_veq6k")

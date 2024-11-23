@@ -17,6 +17,10 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://Common/Game Manager/GameManager.gd"
+
 [display]
 
 window/vsync/vsync_mode=0

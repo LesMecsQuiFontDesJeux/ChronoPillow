@@ -16,7 +16,7 @@ func get_input():
 	if input_direction == Vector2.ZERO:
 		if not idle:
 			start_idle()
-			idle = true		
+			idle = true
 	# Determine the current facing direction based on input
 	if input_direction != Vector2.ZERO:
 		var curr_facing = Vector2(input_direction.x, input_direction.y).normalized().round()
