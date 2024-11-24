@@ -26,6 +26,7 @@ func start_day(first_day: bool = false) -> void:
 
 	if has_lantern:
 		var lantern: Item = load("res://Entities/Items/Lantern/Lantern.tscn").instantiate()
+		world.add_child(lantern)
 		player.place_on_head(lantern)
 
 	if first_day:

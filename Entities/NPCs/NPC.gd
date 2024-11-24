@@ -106,7 +106,7 @@ func show_dialog(alt_dialog: String = "") -> void:
 			if character == "]":
 					inside_bbcode = false
 
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(3.0).timeout
 	_shift_camera_reset()
 	dialog_window.visible = false
 	rich_text_label.text = ""

@@ -26,7 +26,7 @@ offset_bottom = 320.0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 theme_override_styles/separator = SubResource("StyleBoxEmpty_batjf")
 
 [node name="Label" type="Label" parent="VBoxContainer"]
@@ -35,11 +35,6 @@ theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_dvnca")
 theme_override_styles/normal = SubResource("StyleBoxFlat_57qys")
 horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-theme_override_styles/separator = SubResource("StyleBoxEmpty_batjf")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

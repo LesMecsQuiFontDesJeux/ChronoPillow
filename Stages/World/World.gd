@@ -43,6 +43,7 @@ func _on_house_outside_door_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 
 		body.player_location = Player.PlayerLocation.House
+		body.in_cave = true
 
 		for door in get_tree().get_nodes_in_group("doorsoutside"):
 			door.set_deferred("disabled", true)
@@ -61,6 +62,7 @@ func _on_house_inside_door_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 
 		body.player_location = Player.PlayerLocation.Plain
+		body.in_cave = false
 	
 		for door in get_tree().get_nodes_in_group("doorsinside"):
 			door.set_deferred("disabled", true)

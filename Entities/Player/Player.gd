@@ -26,6 +26,8 @@ var z_index_item_slot: Dictionary = {
 	"right": 1
 }
 
+var in_cave = false
+
 var player_location: PlayerLocation = PlayerLocation.Plain
 var is_blocked = false # When movement is controlled by another entity
 var picked_up_item: Item = null
@@ -114,6 +116,9 @@ func pick_up():
 		var entity = check_for_interactable("items")
 		print(entity, entity is Item)
 		if entity and entity is Item:
+			if (entity.in_cave and not in_cave) or (not entity.in_cave and in_cave):
+				print("Cannot pick up item from another layer")
+				return
 			pick_up_item(entity)
 		else:
 			print("No item to pick up")
