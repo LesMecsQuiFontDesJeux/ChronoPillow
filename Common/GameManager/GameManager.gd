@@ -47,8 +47,8 @@ func end_day(player_died: bool = false) -> void:
 	var player: Player = world.get_player()
 	var pillow: Pillow = world.get_pillow()
 
-	if player.is_in_group("brave") and not is_brave:
-		is_brave = true
+	# if player.is_in_group("brave") and not is_brave:
+	# 	is_brave = true
 	
 	if not player_died:
 		stored_item_name = pillow.get_stored_item_name()

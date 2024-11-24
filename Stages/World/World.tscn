@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=36 format=4 uid="uid://da8gx1ocm6ubj"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -8,10 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dx1n8xwv7iwhi" path="res://Entities/NPCs/Bouhtade/Bouhtade.tscn" id="5_1dsgm"]
 [ext_resource type="PackedScene" uid="uid://budpcbklr8o1v" path="res://Entities/Pillow/Pillow.tscn" id="5_s4xbx"]
 [ext_resource type="PackedScene" uid="uid://bxhvfxyunv8my" path="res://UI/Transitions/CircularFadeInOut.tscn" id="6_0bawl"]
-[ext_resource type="PackedScene" uid="uid://bvnv4npmrkv78" path="res://Entities/Items/Bucket/Bucket.tscn" id="7_6y6xp"]
-[ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="7_etmpj"]
-[ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="8_go3jy"]
-[ext_resource type="PackedScene" uid="uid://di8qy7m6otn4p" path="res://Entities/Cauldron/Cauldron.tscn" id="9_2kxtp"]
 [ext_resource type="PackedScene" uid="uid://dxdxlm1t4fix7" path="res://Entities/Items/Potion/Potion.tscn" id="9_nh1if"]
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 
@@ -30,6 +26,9 @@ height = 696.664
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkdbg"]
 radius = 160.0
 height = 458.629
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecjqn"]
+size = Vector2(21.8, 50.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dseop"]
 radius = 65.0
@@ -103,6 +102,10 @@ script = ExtResource("1_6nnoi")
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 blend_mode = 2
 shadow_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
 
 [node name="Transitions" type="CanvasLayer" parent="."]
 
@@ -184,6 +187,18 @@ shape = SubResource("CapsuleShape2D_cuvny")
 position = Vector2(228, 127)
 shape = SubResource("CapsuleShape2D_lkdbg")
 
+[node name="GraveyardStaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1302.54, 497.935)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GraveyardStaticBody2D"]
+position = Vector2(-3.54004, 6.065)
+shape = SubResource("RectangleShape2D_ecjqn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GraveyardStaticBody2D"]
+position = Vector2(-25.54, 25.065)
+rotation = 1.60303
+shape = SubResource("RectangleShape2D_ecjqn")
+
 [node name="PlainArea2D" type="Area2D" parent="."]
 visible = false
 
@@ -243,10 +258,10 @@ z_index = -6
 position = Vector2(712, 442)
 
 [node name="Bouhtade" parent="." instance=ExtResource("5_1dsgm")]
-position = Vector2(1562, 146)
+position = Vector2(1693, 384)
 
 [node name="Player" parent="." instance=ExtResource("2_hpqvq")]
-position = Vector2(1488, 284)
+position = Vector2(1175, 515)
 
 [node name="WaterNode" type="Node2D" parent="."]
 position = Vector2(1, 2)
@@ -318,17 +333,20 @@ rotation = -5.53095
 shape = SubResource("RectangleShape2D_ipccu")
 
 [node name="Spirit" parent="." instance=ExtResource("12_nwyy2")]
-position = Vector2(735, 553)
+position = Vector2(1097, 91)
+
+[node name="Spirit2" parent="." instance=ExtResource("12_nwyy2")]
+position = Vector2(1672, 315)
+
+[node name="Spirit3" parent="." instance=ExtResource("12_nwyy2")]
+position = Vector2(1448, 121)
+
+[node name="Spirit4" parent="." instance=ExtResource("12_nwyy2")]
+z_index = -4
+position = Vector2(1574, 551)
 
 [node name="Potion" parent="." instance=ExtResource("9_nh1if")]
-position = Vector2(651, 559)
-
-[node name="Bucket" parent="." instance=ExtResource("7_6y6xp")]
-position = Vector2(689, 549)
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
+position = Vector2(1195, 476)
 
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
