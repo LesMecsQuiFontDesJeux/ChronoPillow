@@ -7,7 +7,7 @@ var is_brave: bool = false
 
 const TARGET_WIDTH: float = 1280.0
 const TARGET_HEIGHT: float = 720.0
-const BASE_ZOOM = 2.5
+const BASE_ZOOM = 4
 
 var scale_ratio: float = 1.0
 

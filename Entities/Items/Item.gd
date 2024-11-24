@@ -3,7 +3,7 @@ extends Node2D
 
 @export var item_name: String = "Item"
 var is_pickable: bool = true
-var in_cave: bool = false
+@export var in_cave: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
