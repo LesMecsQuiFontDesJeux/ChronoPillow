@@ -106,6 +106,8 @@ func interact():
 		if entity and entity.has_method("on_interact"):
 			if entity is Bouhtade and not GameManager.is_brave:
 				return
+			if entity is Letter:
+				return
 			entity.on_interact()
 		else:
 			print("No interactable found")
@@ -172,7 +174,7 @@ func pick_up_item(item: Item):
 		drop_item()
 		pick_up_item(item)
 func drop_item():
-	if picked_up_item != null:
+	if picked_up_item != null and not picked_up_item.is_in_group("undroppable"):
 		picked_up_item.global_position = global_position
 		picked_up_item.remove_from_group("held")
 		picked_up_item.reparent(get_parent())
