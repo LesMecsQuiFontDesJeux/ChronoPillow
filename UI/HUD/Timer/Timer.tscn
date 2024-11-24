@@ -54,7 +54,7 @@ collision_mask = 2
 
 [node name="Rope" type="Line2D" parent="Timer/GravityOverride/LeftRope"]
 points = PackedVector2Array(20, 24, 20, 0)
-width = 1.0
+width = 5.0
 default_color = Color(0.286275, 0.160784, 0.137255, 1)
 
 [node name="LR_T" type="PinJoint2D" parent="Timer/GravityOverride/LeftRope"]
@@ -78,7 +78,7 @@ collision_mask = 2
 
 [node name="Rope" type="Line2D" parent="Timer/GravityOverride/RightRope"]
 points = PackedVector2Array(0, 24, 0, 0)
-width = 1.0
+width = 5.0
 default_color = Color(0.286275, 0.160784, 0.137255, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/GravityOverride/RightRope"]

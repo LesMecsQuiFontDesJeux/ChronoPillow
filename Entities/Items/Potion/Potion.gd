@@ -8,4 +8,4 @@ func on_interact():
 	var player: Player = get_tree().get_nodes_in_group("player")[0]
 	player.drop_item()
 	call_deferred("free")
-	player.add_to_group("brave")
+	GameManager.is_brave = true
