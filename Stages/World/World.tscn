@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=43 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 [ext_resource type="PackedScene" uid="uid://di8qy7m6otn4p" path="res://Entities/Cauldron/Cauldron.tscn" id="13_on7oi"]
 [ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="14_stmjq"]
+[ext_resource type="PackedScene" uid="uid://c25p4g3a3g1y7" path="res://Entities/Ladder/Ladder.tscn" id="15_48k3a"]
 [ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="15_jeplj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otlap"]
@@ -108,9 +109,6 @@ size = Vector2(18.5, 6)
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_6nnoi")
-
-[node name="Ladder" parent="." instance=ExtResource("3_kvis1")]
-position = Vector2(980, 611)
 
 [node name="Sun" type="DirectionalLight2D" parent="."]
 blend_mode = 2
@@ -399,9 +397,13 @@ position = Vector2(95, 463)
 position = Vector2(824, 504)
 in_cave = true
 
+[node name="Ladder" parent="." instance=ExtResource("15_48k3a")]
+z_index = 16
+position = Vector2(644, 188)
+
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
-[connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_cave_exit"]
-[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]
+[connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]
