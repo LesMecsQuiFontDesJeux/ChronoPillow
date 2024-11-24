@@ -372,5 +372,5 @@ position = Vector2(1416, 1276)
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_cave_exit"]
-[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]
 [connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]

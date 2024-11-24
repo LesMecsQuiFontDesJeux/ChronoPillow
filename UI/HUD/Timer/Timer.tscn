@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/HUD/Timer/Timer.gd" id="1_gnorl"]
 [ext_resource type="Texture2D" uid="uid://drotr75a21h1w" path="res://UI/HUD/Timer/Art/TimerPlaying.png" id="1_hdofh"]
 [ext_resource type="FontFile" uid="uid://dgcf0b68l8ks6" path="res://Assets/Fonts/RoTwimchRegular-WyR3n.ttf" id="2_um1ua"]
-[ext_resource type="Texture2D" uid="uid://bf51tpaf7y325" path="res://Entities/God/Art/vlc.png" id="4_fv41w"]
+[ext_resource type="Texture2D" uid="uid://bf51tpaf7y325" path="res://Entities/Alfred/Art/vlc.png" id="4_fv41w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah3mg"]
 size = Vector2(234, 118.938)
@@ -95,10 +95,11 @@ node_a = NodePath("../../Timer")
 node_b = NodePath("..")
 
 [node name="GodEntity" type="RigidBody2D" parent="Timer/GravityOverride" groups=["god"]]
-position = Vector2(93, -66)
+position = Vector2(100, -1000)
 collision_layer = 2
 collision_mask = 2
 freeze = true
+freeze_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Timer/GravityOverride/GodEntity"]
 scale = Vector2(4, 4)

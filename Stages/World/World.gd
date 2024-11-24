@@ -8,6 +8,7 @@ extends Node2D
 
 func _ready() -> void:
 	_on_house_outside_door_area_2d_body_entered(get_node("Player"))
+	get_player().z_index_item_slot.merge({"down": 4}, true)
 
 func get_pillow() -> Pillow:
 	return get_node("Pillow")
