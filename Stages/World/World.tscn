@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=40 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -113,6 +113,7 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
@@ -122,7 +123,6 @@ color = Color(0, 0, 0, 1)
 [node name="CircularFadeInOut" parent="Transitions" instance=ExtResource("6_0bawl")]
 
 [node name="OverworldLayers" type="Node2D" parent="."]
-visible = false
 
 [node name="Ground" type="TileMapLayer" parent="OverworldLayers"]
 z_index = -5
@@ -382,5 +382,5 @@ shape = SubResource("RectangleShape2D_o2i2b")
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_cave_exit"]
-[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
