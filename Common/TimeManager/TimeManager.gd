@@ -8,9 +8,9 @@ enum TimeOfDay {
 	Paused
 }
 
-const FULL_DAY_LENGTH: float = 100.0
-const MORNING_END: float = 25.0
-const DAY_END: float = 75.0
+const FULL_DAY_LENGTH: float = 10.0
+const MORNING_END: float = 15.0
+const DAY_END: float = 45.0
 
 const MORNING_COLOR: Color = Color(1.0, 0.6, 0.2)
 const DAY_COLOR: Color = Color(1.0, 1.0, 1.0)
@@ -39,6 +39,9 @@ func _on_timer_timeout() -> void:
 		return
 	elif player.player_location == player.PlayerLocation.Plain:
 		player.die_from_lightning()
+		return
+	elif player.player_location == player.PlayerLocation.Cave:
+		player.die()
 		return
 
 func on_player_died() -> void:
