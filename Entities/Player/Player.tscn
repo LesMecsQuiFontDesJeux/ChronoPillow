@@ -56,6 +56,10 @@ spread = 180.0
 gravity = Vector2(0, 150)
 initial_velocity_max = 50.0
 
+[node name="HeadSlot" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [node name="FeetArea2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FeetArea2D"]

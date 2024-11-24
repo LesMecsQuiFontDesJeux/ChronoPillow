@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://da8gx1ocm6ubj"]
+[gd_scene load_steps=39 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bxhvfxyunv8my" path="res://UI/Transitions/CircularFadeInOut.tscn" id="6_0bawl"]
 [ext_resource type="PackedScene" uid="uid://bvnv4npmrkv78" path="res://Entities/Items/Bucket/Bucket.tscn" id="7_6y6xp"]
 [ext_resource type="PackedScene" uid="uid://dxdxlm1t4fix7" path="res://Entities/Items/Potion/Potion.tscn" id="9_nh1if"]
+[ext_resource type="PackedScene" uid="uid://s33apj7dm6pe" path="res://Entities/Items/Lantern/Lantern.tscn" id="12_1xvfg"]
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otlap"]
@@ -96,14 +97,22 @@ size = Vector2(90.1287, 494.237)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipccu"]
 size = Vector2(90.1287, 494.237)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlaw2"]
+size = Vector2(20, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2i2b"]
+size = Vector2(18.5, 6)
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_6nnoi")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="Sun" type="DirectionalLight2D" parent="."]
 blend_mode = 2
 shadow_color = Color(0, 0, 0, 1)
 
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
@@ -245,14 +254,14 @@ shape = SubResource("CapsuleShape2D_0ck66")
 [node name="HouseOutsideDoorArea2D" type="Area2D" parent="."]
 position = Vector2(768, 516)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseOutsideDoorArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseOutsideDoorArea2D" groups=["doorsoutside"]]
 position = Vector2(-1, -5)
 shape = SubResource("RectangleShape2D_2ie8d")
 
 [node name="HouseInsideDoorArea2D" type="Area2D" parent="."]
 position = Vector2(766, 515)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseInsideDoorArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseInsideDoorArea2D" groups=["doorsinside"]]
 position = Vector2(2, 10)
 shape = SubResource("RectangleShape2D_g436n")
 
@@ -354,9 +363,24 @@ position = Vector2(750, 579)
 [node name="Bucket" parent="." instance=ExtResource("7_6y6xp")]
 position = Vector2(159, 679)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Lantern" parent="." instance=ExtResource("12_1xvfg")]
+position = Vector2(818, 571)
 
-[node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
+[node name="CaveInsideDoorArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveInsideDoorArea2D" groups=["doorsinside"]]
+position = Vector2(1015, 991)
+shape = SubResource("RectangleShape2D_dlaw2")
+
+[node name="CaveOutsideDoorArea2D2" type="Area2D" parent="."]
+position = Vector2(1015, 998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveOutsideDoorArea2D2" groups=["doorsoutside"]]
+shape = SubResource("RectangleShape2D_o2i2b")
 
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
+[connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
+[connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_cave_exit"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]

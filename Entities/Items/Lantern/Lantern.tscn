@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://s33apj7dm6pe"]
+
+[ext_resource type="Script" path="res://Entities/Items/Lantern/Lantern.gd" id="1_n5m60"]
+[ext_resource type="Texture2D" uid="uid://cfy0rc4eiruik" path="res://Entities/Items/Lantern/Art/Lantern.png" id="2_38qjc"]
+[ext_resource type="Texture2D" uid="uid://x4c6h3lyorv3" path="res://Entities/Items/Lantern/Art/LightMask.png" id="3_xo7la"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xcn2o"]
+
+[node name="Lantern" type="Node2D" groups=["interactable_held"]]
+script = ExtResource("1_n5m60")
+item_name = "Lantern"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_38qjc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xcn2o")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.57
+texture = ExtResource("3_xo7la")
+texture_scale = 3.0
