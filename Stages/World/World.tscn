@@ -242,7 +242,7 @@ position = Vector2(712, 442)
 position = Vector2(1562, 146)
 
 [node name="Player" parent="." instance=ExtResource("2_hpqvq")]
-position = Vector2(857, 559)
+position = Vector2(1488, 284)
 
 [node name="WaterNode" type="Node2D" parent="."]
 position = Vector2(1, 2)
