@@ -26,13 +26,14 @@ var z_index_item_slot: Dictionary = {
 	"right": 1
 }
 
-var player_location: PlayerLocation = PlayerLocation.House
-
+var player_location: PlayerLocation = PlayerLocation.Plain
+var is_blocked = false # When movement is controlled by another entity
 var picked_up_item: Item = null
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = input_direction.normalized() * speed
-
+	if not is_blocked:
+		velocity = input_direction.normalized() * speed
+		
 	if input_direction == Vector2.ZERO:
 		if not idle:
 			start_idle()

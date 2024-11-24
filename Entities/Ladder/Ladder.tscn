@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c25p4g3a3g1y7"]
+
+[ext_resource type="Texture2D" uid="uid://b3bikj3i7k5d1" path="res://Entities/Ladder/Art/Ladder.png" id="1_5ix7m"]
+[ext_resource type="Script" path="res://Entities/Ladder/Ladder.gd" id="1_c4kee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8ucj"]
+size = Vector2(14, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swaad"]
+size = Vector2(14, 6)
+
+[node name="Ladder" type="Node2D"]
+script = ExtResource("1_c4kee")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ix7m")
+
+[node name="LadderArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderArea"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_r8ucj")
+
+[node name="LadderFrontArea" type="Area2D" parent="."]
+position = Vector2(0, 35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderFrontArea"]
+shape = SubResource("RectangleShape2D_swaad")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 34.36)
+zoom = Vector2(4, 4)
+
+[connection signal="body_entered" from="LadderArea" to="." method="_on_ladder_area_body_entered"]
+[connection signal="body_exited" from="LadderArea" to="." method="_on_ladder_area_body_exited"]
+[connection signal="body_entered" from="LadderFrontArea" to="." method="_on_ladder_front_area_body_entered"]
+[connection signal="body_exited" from="LadderFrontArea" to="." method="_on_ladder_front_area_body_exited"]

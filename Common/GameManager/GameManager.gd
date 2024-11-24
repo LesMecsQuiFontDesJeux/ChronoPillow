@@ -4,6 +4,7 @@ var time_manager: TimeManager
 var day: int = 0
 var stored_item_name = null
 var is_brave: bool = false
+var has_stopped_timer: bool = false
 var has_lantern: bool = false
 
 func _ready() -> void:
