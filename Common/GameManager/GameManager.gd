@@ -42,7 +42,7 @@ func start_day(first_day: bool = false) -> void:
 	call_deferred("setup_time_manager", world.get_player())
 	call_deferred("set_physics_process", true)
 
-func end_day() -> void:
+func end_day(win: bool = false) -> void:
 	var world: World = get_node("/root/World")
 	var player: Player = world.get_player()
 	var pillow: Pillow = world.get_pillow()
@@ -53,7 +53,12 @@ func end_day() -> void:
 	world.call_deferred("free")
 
 	day += 1
-	start_day()
+
+	if win:
+		var menu: MainMenu = get_node("/root/MainMenu")
+		menu.win()
+	else:
+		start_day()
 
 func _physics_process(_delta):
 	var world: World = get_node("/root/World")

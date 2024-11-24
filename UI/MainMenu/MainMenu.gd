@@ -1,3 +1,4 @@
+class_name MainMenu
 extends Control
 
 func _on_play_pressed() -> void:
@@ -15,3 +16,8 @@ func _on_credits_pressed() -> void:
 func _on_back_pressed() -> void:
 	$Buttons.set_visible(true)
 	$Credits.set_visible(false)
+
+func win() -> void:
+	set_visible(true)
+	set_process_input(true)
+	$Medal.set_visible(true)

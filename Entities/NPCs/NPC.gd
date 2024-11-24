@@ -68,7 +68,7 @@ func play_animation(animation_name: String) -> void:
 func on_interact() -> void:
 	show_dialog()
 
-func show_dialog(alt_dialog: String = "") -> void:
+func show_dialog(alt_dialog: String = "", end: bool = false) -> void:
 	player.can_move = false
 	var formatted_dialog_key: String = ""
 	if alt_dialog == "":
@@ -107,6 +107,9 @@ func show_dialog(alt_dialog: String = "") -> void:
 					inside_bbcode = false
 
 	await get_tree().create_timer(3.0).timeout
+	if end:
+		await get_tree().create_timer(3.0).timeout
+		GameManager.end_day(true)
 	_shift_camera_reset()
 	dialog_window.visible = false
 	rich_text_label.text = ""

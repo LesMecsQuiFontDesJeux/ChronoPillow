@@ -60,6 +60,9 @@ func stop_day() -> void:
 
 func pause_day() -> void:
 	timer.set_paused(true)
+	var world: World = get_node("/root/World")
+	var audio: AudioStreamPlayer = world.get_node("AudioStreamPlayer")
+	audio.stop()
 
 func resume_day() -> void:
 	timer.set_paused(false)

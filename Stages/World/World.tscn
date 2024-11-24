@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=40 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="15_jeplj"]
 [ext_resource type="PackedScene" uid="uid://c85hx8mjan87" path="res://Entities/NPCs/Martin/Martin.tscn" id="16_41uw5"]
 [ext_resource type="PackedScene" uid="uid://c5mng25uhc621" path="res://Entities/Dynamite/Dynamite.tscn" id="18_wqa0m"]
+[ext_resource type="AudioStream" uid="uid://cwfsdbcuby2op" path="res://Assets/Audio/Background.mp3" id="19_bqcfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3xk6"]
 size = Vector2(989, 505)
@@ -86,6 +87,11 @@ size = Vector2(18.5, 6)
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_6nnoi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_bqcfj")
+volume_db = -30.0
+autoplay = true
 
 [node name="Sun" type="DirectionalLight2D" parent="."]
 blend_mode = 2
@@ -314,7 +320,7 @@ z_index = -4
 position = Vector2(1574, 551)
 
 [node name="Bucket" parent="." instance=ExtResource("7_6y6xp")]
-position = Vector2(1368, 996)
+position = Vector2(67, 400)
 
 [node name="CaveInsideDoorArea2D" type="Area2D" parent="."]
 

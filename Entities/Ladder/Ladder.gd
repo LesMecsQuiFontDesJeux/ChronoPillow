@@ -3,8 +3,8 @@ extends Node2D
 
 var player_on_ladder: bool = false
 var player_in_front_of_ladder: bool = false
-var player_near_top: bool = false  # New boolean to track if player is near top
-var top_threshold: float = 20.0    # Distance from top to trigger near_top state
+var player_near_top: bool = false # New boolean to track if player is near top
+var top_threshold: float = 20.0 # Distance from top to trigger near_top state
 
 @onready var ladder_area: Area2D = $LadderArea
 
@@ -89,10 +89,22 @@ func _physics_process(_delta: float) -> void:
 		# Reset states when not on ladder
 		player.is_blocked = false
 		player_on_ladder = false
-		player_near_top = false  # Reset near_top state when off ladder
+		player_near_top = false # Reset near_top state when off ladder
 		get_node("/root/World/Player/Camera2D").make_current()
 	if Input.is_action_just_pressed("interact"):
 		print(player_near_top, get_tree().get_node_count_in_group("breaking_joint") == 0)
 	if player_near_top and Input.is_action_just_pressed("interact") and get_tree().get_node_count_in_group("breaking_joint") == 0:
 		GameManager.has_stopped_timer = true
+		GameManager.time_manager.pause_day()
+
+		var npc = load("res://Entities/NPCs/Bouhtade/Bouhtade.tscn")
+		npc = npc.instantiate()
+		npc.npc_name = "Alfred"
+		npc.position = Vector2(10000, 10000)
+		add_child(npc)
+		var alfred: RigidBody2D = get_tree().get_first_node_in_group("god")
+		if alfred != null:
+			alfred.freeze = false
+		npc.show_dialog("KEY_Alfred_Fin", true)
+
 		print("Player has reached the top of the ladder and stopped the timer")
