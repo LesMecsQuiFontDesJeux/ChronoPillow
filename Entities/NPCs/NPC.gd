@@ -69,20 +69,23 @@ func play_animation(animation_name: String) -> void:
 		animated_sprite.play("default")
 
 func on_interact() -> void:
-	player.can_move = false
 	show_dialog()
 
-func show_dialog() -> void:
-	
-	var formatted_dialog_key: String = "KEY_" + npc_name + "_" + str(dialog_progress)
+func show_dialog(alt_dialog: String = "") -> void:
+	player.can_move = false
+	var formatted_dialog_key: String = ""
+	if alt_dialog == "":
+		formatted_dialog_key = "KEY_" + npc_name + "_" + str(dialog_progress)
+		dialog_progress += 1
+	else:
+		formatted_dialog_key = alt_dialog
 
 	var dialog: String = tr(formatted_dialog_key)
 
 	if dialog == formatted_dialog_key:
 		dialog_progress = 0
+		player.can_move = true
 		return
-
-	dialog_progress += 1
 
 	dialog_indicator_sprite.set_visible(false)
 	_shift_camera_left()
@@ -92,9 +95,20 @@ func show_dialog() -> void:
 	dialog_window.visible = true
 	
 	var rich_text_label: RichTextLabel = dialog_window.get_node("RichTextLabel")
-	for i in range(dialog.length()):
-					rich_text_label.text += dialog[i]
+
+	var text_to_display = ""
+	var inside_bbcode = false
+	for character in dialog:
+			if character == "[":
+					inside_bbcode = true
+			if inside_bbcode:
+					text_to_display += character
+			else:
+					text_to_display += character
+					rich_text_label.bbcode_text = text_to_display
 					await get_tree().create_timer(0.025).timeout
+			if character == "]":
+					inside_bbcode = false
 
 	await get_tree().create_timer(2.0).timeout
 	_shift_camera_reset()

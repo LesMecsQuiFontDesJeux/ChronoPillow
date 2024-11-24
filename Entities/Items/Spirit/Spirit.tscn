@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_knwcx"]
 radius = 5.0
 
-[node name="Spirit" type="AnimatedSprite2D"]
+[node name="Spirit" type="AnimatedSprite2D" groups=["interactable_held"]]
 sprite_frames = ExtResource("1_hofkj")
 autoplay = "default"
 frame_progress = 0.804962

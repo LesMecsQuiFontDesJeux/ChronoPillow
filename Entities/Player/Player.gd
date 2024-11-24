@@ -99,6 +99,8 @@ func interact():
 		var entity = check_for_interactable()
 		print(entity)
 		if entity and entity.has_method("on_interact"):
+			if entity is Bouhtade and not GameManager.is_brave:
+				return
 			entity.on_interact()
 		else:
 			print("No interactable found")
@@ -124,7 +126,7 @@ func check_for_interactable(group: String = ""):
 	for body in bodies:
 		print(body, body.get_parent())
 		# Check if the body is in the specified group, or skip filtering if group is empty
-		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position"):
+		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position") and body.name != "FeetArea2D":
 			if body.get_parent():
 				if body.get_parent().is_in_group("held"):
 					continue
@@ -175,20 +177,26 @@ func _physics_process(_delta):
 		get_input()
 		move_and_slide()
 
-
-func _on_interaction_area_area_entered(area: Area2D) -> void:
-	var world = get_node("/root/World")
-	if world == null:
-		return
-	if area.name == "GraveyardArea2D":
-		var bouhtade = world.get_npcs_by_name("Bouhtade")
-		bouhtade.in_graveyard = true
-		player_location = PlayerLocation.Graveyard
-	elif area.name == "PlainArea2D":
-		player_location = PlayerLocation.Plain
-
 func die_from_bouhtade():
 	can_move = false
 	var particles: CPUParticles2D = $BloodCPUParticles2D
 	particles.emitting = true
 	emit_signal("died")
+
+func _on_feet_area_2d_area_exited(area: Area2D) -> void:
+	var world = get_node("/root/World")
+	if world == null:
+		return
+	var bouhtade: Bouhtade = world.get_npcs_by_name("Bouhtade")
+	if area.name == "GraveyardArea2D":
+		player_location = PlayerLocation.Plain
+		if not GameManager.is_brave:
+			bouhtade.disable_unable_player_to_enter_target_mode()
+	elif area.name == "PlainArea2D":
+		bouhtade.in_graveyard = true
+		player_location = PlayerLocation.Graveyard
+		if not GameManager.is_brave:
+			bouhtade.unable_player_to_enter_target_mode()
+		else:
+			for child in world.get_node("GraveyardStaticBody2D").get_children():
+				child.call_deferred("set_disabled", true)
