@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0a6kas1x5ntx"]
+[gd_scene load_steps=9 format=3 uid="uid://d0a6kas1x5ntx"]
 
 [ext_resource type="Script" path="res://UI/HUD/Timer/Timer.gd" id="1_gnorl"]
 [ext_resource type="Texture2D" uid="uid://drotr75a21h1w" path="res://UI/HUD/Timer/Art/TimerPlaying.png" id="1_hdofh"]
 [ext_resource type="FontFile" uid="uid://dgcf0b68l8ks6" path="res://Assets/Fonts/RoTwimchRegular-WyR3n.ttf" id="2_um1ua"]
+[ext_resource type="Texture2D" uid="uid://bf51tpaf7y325" path="res://Entities/God/Art/vlc.png" id="4_fv41w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah3mg"]
 size = Vector2(234, 118.938)
@@ -92,6 +93,20 @@ node_b = NodePath("..")
 position = Vector2(0, 24)
 node_a = NodePath("../../Timer")
 node_b = NodePath("..")
+
+[node name="GodEntity" type="RigidBody2D" parent="Timer/GravityOverride" groups=["god"]]
+position = Vector2(93, -66)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Timer/GravityOverride/GodEntity"]
+scale = Vector2(4, 4)
+texture = ExtResource("4_fv41w")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Timer/GravityOverride/GodEntity"]
+position = Vector2(0, 5)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-11, 11, 11, 11, 11, 4, 2, -12, -2, -12, -11, 4)
 
 [node name="Timer" type="RigidBody2D" parent="Timer/GravityOverride"]
 position = Vector2(0, 8)
