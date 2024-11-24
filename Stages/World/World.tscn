@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=42 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://dxdxlm1t4fix7" path="res://Entities/Items/Potion/Potion.tscn" id="9_nh1if"]
 [ext_resource type="PackedScene" uid="uid://s33apj7dm6pe" path="res://Entities/Items/Lantern/Lantern.tscn" id="12_1xvfg"]
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
+[ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="13_crgd6"]
+[ext_resource type="PackedScene" uid="uid://c5mng25uhc621" path="res://Entities/Dynamite/Dynamite.tscn" id="14_8jljo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otlap"]
 radius = 243.0
@@ -377,6 +379,12 @@ position = Vector2(1015, 998)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CaveOutsideDoorArea2D2" groups=["doorsoutside"]]
 shape = SubResource("RectangleShape2D_o2i2b")
+
+[node name="Rat" parent="." instance=ExtResource("13_crgd6")]
+position = Vector2(712, 558)
+
+[node name="Dynamite" parent="." instance=ExtResource("14_8jljo")]
+position = Vector2(722, 615)
 
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
