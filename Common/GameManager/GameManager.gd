@@ -13,6 +13,11 @@ func _ready() -> void:
 	add_child(time_manager)
 
 func start_game() -> void:
+	is_brave = false
+	has_stopped_timer = false
+	has_lantern = false
+	day = 0
+	stored_item_name = null
 	start_day(true)
 
 func setup_time_manager(player: Player) -> void:
