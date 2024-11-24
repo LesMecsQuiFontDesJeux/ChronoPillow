@@ -61,3 +61,7 @@ func gather_spirit_piece() -> void:
 
 	if spirit_pieces == 0:
 		show_dialog("KEY_Bouhtade_CollectedAllSpiritPieces")
+		var lantern: Item = load("res://Entities/Items/Lantern/Lantern.tscn").instantiate()
+		lantern.position = global_position + Vector2(0, -5)
+		var world = get_node("/root/World")
+		world.add_child(lantern)

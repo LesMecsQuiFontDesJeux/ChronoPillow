@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var dialog_progress: float = 0
 var dialog_indicator_sprite: AnimatedSprite2D
-var dialog_window: Sprite2D
+var dialog_window: TextureRect
 var player: Player
 var world: World
 
@@ -18,12 +18,12 @@ var default_position: Vector2
 func _enter_tree() -> void:
 	world = get_node("/root/World")
 	player = world.get_player()
+	dialog_window = world.get_node("HUD/DialogBubble")
 	default_position = global_transform.origin
 
 func _ready() -> void:
 	add_to_group("npcs")
 	_create_dialog_indicator()
-	_create_dialog_window()
 	play_animation("default")
 
 func _create_dialog_indicator() -> void:
@@ -33,16 +33,12 @@ func _create_dialog_indicator() -> void:
 	dialog_indicator_sprite = dialog_indicator
 	add_child(dialog_indicator)
 
-func _create_dialog_window() -> void:
-	dialog_window = load("res://Entities/NPCs/Art/DialogBubble.tscn").instantiate()
-	dialog_window.visible = false
-	add_child(dialog_window)
-
 func move(move_velocity: Vector2) -> void:
 	velocity = move_velocity
 	move_and_slide()
 
 func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float = 30) -> void:
+	dialog_indicator_sprite.set_visible(true)
 	var direction = player.global_transform.origin - global_transform.origin
 	var distance = direction.length()
 
@@ -58,6 +54,7 @@ func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float =
 		animated_sprite.flip_h = false
 
 func go_to_default_position(delta: float, lerp_factor: float = 0.5) -> void:
+	dialog_indicator_sprite.set_visible(false)
 	var direction = default_position - global_transform.origin
 	var target_position = global_transform.origin + direction.normalized() * speed * delta
 	global_transform.origin = global_transform.origin.lerp(target_position, lerp_factor)
@@ -90,11 +87,10 @@ func show_dialog(alt_dialog: String = "") -> void:
 	dialog_indicator_sprite.set_visible(false)
 	_shift_camera_left()
 
-	dialog_window.position = Vector2(120 * GameManager.scale_ratio, 0)
-	dialog_window.get_node("Label").text = npc_name
+	dialog_window.get_node("VBoxContainer/Label").text = npc_name
 	dialog_window.visible = true
 	
-	var rich_text_label: RichTextLabel = dialog_window.get_node("RichTextLabel")
+	var rich_text_label: RichTextLabel = dialog_window.get_node("VBoxContainer/MarginContainer/RichTextLabel")
 
 	var text_to_display = ""
 	var inside_bbcode = false
@@ -121,7 +117,7 @@ func _shift_camera_left() -> void:
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var tween: Tween = get_tree().create_tween()
 
-	var offset: Vector2 = Vector2(camera.offset.x + get_viewport().size.x / 17 / GameManager.scale_ratio, camera.offset.y)
+	var offset: Vector2 = Vector2(camera.offset.x + camera.zoom.x * 20, camera.offset.y)
 	tween.tween_property(camera, "offset", offset, 0.25)
 	tween.play()
 

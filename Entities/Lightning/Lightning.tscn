@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkj263ivf8o7w"]
+
+[ext_resource type="SpriteFrames" uid="uid://da1p6kkmbqq5" path="res://Entities/Lightning/Data/Lightning.tres" id="1_t6ll4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0liea"]
+blend_mode = 1
+
+[node name="Lightning" type="AnimatedSprite2D"]
+material = SubResource("CanvasItemMaterial_0liea")
+sprite_frames = ExtResource("1_t6ll4")
+frame = 6
+frame_progress = 1.0

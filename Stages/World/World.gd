@@ -6,6 +6,9 @@ extends Node2D
 @onready var overworld_layers: Array = $OverworldLayers.get_children()
 @onready var cave_layers: Array = $CaveLayers.get_children()
 
+func _ready() -> void:
+	_on_house_outside_door_area_2d_body_entered(get_node("Player"))
+
 func get_pillow() -> Pillow:
 	return get_node("Pillow")
 
@@ -21,10 +24,10 @@ func update_lighting(time_of_day: TimeManager.TimeOfDay) -> void:
 func get_player() -> Player:
 	return get_node("Player")
 
-func get_npcs_by_name(name: String) -> NPC:
+func get_npcs_by_name(npc_name: String) -> NPC:
 	var npcs = get_tree().get_nodes_in_group("npcs")
 	for npc in npcs:
-		if npc.npc_name == name:
+		if npc.npc_name == npc_name:
 			return npc
 	return null
 
@@ -38,6 +41,9 @@ func circular_fade_out() -> void:
 
 func _on_house_outside_door_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+
+		body.player_location = Player.PlayerLocation.House
+
 		for door in get_tree().get_nodes_in_group("doorsoutside"):
 			door.set_deferred("disabled", true)
 		for door in get_tree().get_nodes_in_group("doorsinside"):
@@ -50,7 +56,12 @@ func _on_house_outside_door_area_2d_body_entered(body: Node2D) -> void:
 		_set_layers_visibility_and_collision(cave_layers, false)
 		
 func _on_house_inside_door_area_2d_body_entered(body: Node2D) -> void:
+
+
 	if body.is_in_group("player"):
+
+		body.player_location = Player.PlayerLocation.Plain
+	
 		for door in get_tree().get_nodes_in_group("doorsinside"):
 			door.set_deferred("disabled", true)
 		for door in get_tree().get_nodes_in_group("doorsoutside"):
@@ -66,10 +77,12 @@ func _on_cave_enter(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		$Darkness.visible = true
 		$Sun.visible = false
+
 func _on_cave_exit(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		$Darkness.visible = false
 		$Sun.visible = true
+	
 func _set_layers_visibility_and_collision(layers: Array, enabled: bool) -> void:
 	for layer in layers:
 		layer.visible = enabled
@@ -84,8 +97,9 @@ func _set_items_visibility(body: Player, in_cave: bool) -> void:
 		else:
 			body.z_index_item_slot.merge({"down": 1}, true)
 
-	# for tree_item in get_tree().get_nodes_in_group("items"):
-	# 	if tree_item.in_cave:
-	# 		tree_item.visible = in_cave
-	# 	else:
-	# 		tree_item.visible = !in_cave
+	for tree_item in get_tree().get_nodes_in_group("items"):
+		if tree_item != get_player().get_item_on_head():
+			if tree_item.in_cave:
+				tree_item.visible = in_cave
+			else:
+				tree_item.visible = !in_cave
