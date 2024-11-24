@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://brkgrkdaw4tmv"]
+
+[ext_resource type="Texture2D" uid="uid://c8j5objymqh4b" path="res://Entities/Dynamite/Art/SmokeOG.png" id="1_b0pqu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tweg2"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(0, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ux3n"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(64, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pby5s"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(128, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffgo8"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(192, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li34v"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(256, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bopfn"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(320, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxlul"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(384, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esnvf"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(448, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k86vi"]
+atlas = ExtResource("1_b0pqu")
+region = Rect2(512, 384, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tweg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ux3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pby5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffgo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li34v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bopfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxlul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esnvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k86vi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

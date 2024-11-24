@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5mng25uhc621"]
+
+[ext_resource type="Texture2D" uid="uid://c85y0qo1sm83q" path="res://Entities/Dynamite/Art/Dynamite.png" id="1_mc314"]
+[ext_resource type="Script" path="res://Entities/Dynamite/Dynamite.gd" id="1_qkwuv"]
+[ext_resource type="Texture2D" uid="uid://bcr1o0bi30fic" path="res://Entities/Dynamite/Art/Smoke.png" id="3_ge7e5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0idx"]
+
+[sub_resource type="Gradient" id="Gradient_tmxpu"]
+colors = PackedColorArray(0.998559, 0.851569, 0.51077, 1, 1, 0.85098, 0.509804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lr5s0"]
+gradient = SubResource("Gradient_tmxpu")
+width = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lmkm8"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Dynamite" type="Node2D"]
+script = ExtResource("1_qkwuv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mc314")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h0idx")
+
+[node name="FuseCPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -2)
+emitting = false
+amount = 100
+lifetime = 0.4
+texture = SubResource("GradientTexture1D_lr5s0")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -150)
+initial_velocity_max = 100.0
+
+[node name="ExplosionCPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_lmkm8")
+position = Vector2(-1, 0)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("3_ge7e5")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+anim_speed_min = 5.0
+anim_speed_max = 5.0

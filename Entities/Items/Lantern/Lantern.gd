@@ -1,3 +1,4 @@
+class_name Lantern
 extends Item
 
 func on_interact():

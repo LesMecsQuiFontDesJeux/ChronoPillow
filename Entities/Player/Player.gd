@@ -191,6 +191,9 @@ func place_on_head(item: Item):
 	item.remove_from_group("interactable_held")
 	item.on_pickup()
 	picked_up_item = null
+
+func get_head_item() -> Item:
+	return $HeadSlot.get_child(0)
 func _on_feet_area_2d_area_exited(area: Area2D) -> void:
 	var world = get_node("/root/World")
 	if world == null:
