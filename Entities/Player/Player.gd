@@ -17,6 +17,13 @@ enum PlayerLocation {
 	Graveyard
 }
 
+var z_index_item_slot: Dictionary = {
+	"up": - 1,
+	"down": 1,
+	"left": 1,
+	"right": 1
+}
+
 var player_location: PlayerLocation = PlayerLocation.Plain
 
 var picked_up_item: Item = null
@@ -52,37 +59,37 @@ func start_idle():
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down", true)
 			item_slot.position = Vector2(0, 8)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["down"]
 		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
 			play_animation("walk_up", true)
 			item_slot.position = Vector2(0, -8)
-			item_slot.z_index = -1
+			item_slot.z_index = z_index_item_slot["up"]
 		Vector2.LEFT:
 			play_animation("idle_left")
 			item_slot.position = Vector2(-8, 0)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["left"]
 		Vector2.RIGHT:
 			play_animation("idle_right")
 			item_slot.position = Vector2(8, 0)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["right"]
 func start_walk():
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down")
 			item_slot.position = Vector2(0, 8)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["down"]
 		Vector2.UP, Vector2(-1, -1), Vector2(1, -1): # Up and diagonal up
 			play_animation("walk_up")
 			item_slot.position = Vector2(0, -8)
-			item_slot.z_index = -1
+			item_slot.z_index = z_index_item_slot["up"]
 		Vector2.LEFT:
 			play_animation("walk_left")
 			item_slot.position = Vector2(-8, 0)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["left"]
 		Vector2.RIGHT:
 			play_animation("walk_right")
 			item_slot.position = Vector2(8, 0)
-			item_slot.z_index = 1
+			item_slot.z_index = z_index_item_slot["right"]
 			
 func interact():
 	print("Interacting with something")

@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dgu1ejhwnv51y"]
+
+[ext_resource type="Texture2D" uid="uid://chcgwj7718k3g" path="res://Entities/Items/Spirit/Art/Spirit.png" id="1_rmsq4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn3si"]
+atlas = ExtResource("1_rmsq4")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn4wk"]
+atlas = ExtResource("1_rmsq4")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ois37"]
+atlas = ExtResource("1_rmsq4")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klh0a"]
+atlas = ExtResource("1_rmsq4")
+region = Rect2(30, 0, 10, 10)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn3si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn4wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ois37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klh0a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

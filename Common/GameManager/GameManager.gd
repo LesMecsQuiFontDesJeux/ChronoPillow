@@ -3,6 +3,7 @@ extends Node
 var time_manager: TimeManager
 var day: int = 0
 var stored_item_name = null
+var is_brave: bool = false
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -33,11 +34,14 @@ func start_day(first_day: bool = false) -> void:
 	call_deferred("setup_time_manager", world.get_player())
 	call_deferred("set_physics_process", true)
 
-func end_day(player_killed: bool = false) -> void:
+func end_day() -> void:
 	var world: World = get_node("/root/World")
+	var player: Player = world.get_player()
+
+	if player.is_in_group("brave") and not is_brave:
+		is_brave = true
 	
-	if not player_killed:
-		stored_item_name = world.get_pillow().get_stored_item_name()
+	stored_item_name = world.get_pillow().get_stored_item_name()
 
 	set_physics_process(false)
 	world.call_deferred("free")

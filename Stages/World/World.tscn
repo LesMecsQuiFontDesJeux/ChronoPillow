@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="7_etmpj"]
 [ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="8_go3jy"]
 [ext_resource type="PackedScene" uid="uid://di8qy7m6otn4p" path="res://Entities/Cauldron/Cauldron.tscn" id="9_2kxtp"]
+[ext_resource type="PackedScene" uid="uid://dxdxlm1t4fix7" path="res://Entities/Items/Potion/Potion.tscn" id="9_nh1if"]
+[ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otlap"]
 radius = 243.0
@@ -230,14 +232,15 @@ position = Vector2(-1, -5)
 shape = SubResource("RectangleShape2D_2ie8d")
 
 [node name="HouseInsideDoorArea2D" type="Area2D" parent="."]
-position = Vector2(768, 516)
+position = Vector2(766, 515)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseInsideDoorArea2D"]
-position = Vector2(0, 9.5)
+position = Vector2(2, 10)
 shape = SubResource("RectangleShape2D_g436n")
 
 [node name="Pillow" parent="." instance=ExtResource("5_s4xbx")]
-position = Vector2(1080, 440)
+z_index = -6
+position = Vector2(712, 442)
 
 [node name="Bouhtade" parent="." instance=ExtResource("5_1dsgm")]
 position = Vector2(1562, 146)
@@ -314,23 +317,14 @@ position = Vector2(1689, 637)
 rotation = -5.53095
 shape = SubResource("RectangleShape2D_ipccu")
 
-[node name="Pillow2" parent="." instance=ExtResource("5_s4xbx")]
-position = Vector2(726, 632)
+[node name="Spirit" parent="." instance=ExtResource("12_nwyy2")]
+position = Vector2(735, 553)
 
-[node name="Mushroom" parent="." instance=ExtResource("7_etmpj")]
-position = Vector2(741, 695)
+[node name="Potion" parent="." instance=ExtResource("9_nh1if")]
+position = Vector2(651, 559)
 
 [node name="Bucket" parent="." instance=ExtResource("7_6y6xp")]
-position = Vector2(817, 693)
-
-[node name="Rat" parent="." instance=ExtResource("8_go3jy")]
-position = Vector2(774, 712)
-
-[node name="Cauldron" parent="." instance=ExtResource("9_2kxtp")]
-position = Vector2(766, 573)
-
-[node name="Mushroom2" parent="." instance=ExtResource("7_etmpj")]
-position = Vector2(1110, 474)
+position = Vector2(689, 549)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

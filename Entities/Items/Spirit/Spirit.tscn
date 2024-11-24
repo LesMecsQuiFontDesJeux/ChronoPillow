@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkdso4bfo5isy"]
+
+[ext_resource type="SpriteFrames" uid="uid://dgu1ejhwnv51y" path="res://Entities/Items/Spirit/Data/Spirit.tres" id="1_hofkj"]
+[ext_resource type="Script" path="res://Entities/Items/Item.gd" id="2_gx15j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knwcx"]
+radius = 5.0
+
+[node name="Spirit" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_hofkj")
+autoplay = "default"
+frame_progress = 0.804962
+script = ExtResource("2_gx15j")
+item_name = "Spirit"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_knwcx")
