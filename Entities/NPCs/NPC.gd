@@ -37,8 +37,8 @@ func move(move_velocity: Vector2) -> void:
 	velocity = move_velocity
 	move_and_slide()
 
-func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float = 30) -> void:
-	dialog_indicator_sprite.set_visible(true)
+func follow_player(delta: float, lerp_factor: float = 0.5, min_distance: float = 30, dialog_indicator: bool = true) -> void:
+	dialog_indicator_sprite.set_visible(dialog_indicator)
 	var direction = player.global_transform.origin - global_transform.origin
 	var distance = direction.length()
 

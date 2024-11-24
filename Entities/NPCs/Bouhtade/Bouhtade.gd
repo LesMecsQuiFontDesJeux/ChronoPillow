@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if player.player_location == player.PlayerLocation.Graveyard and in_graveyard:
-		follow_player(delta, lerp_factor, min_distance)
+		follow_player(delta, lerp_factor, min_distance, not evil)
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.name == "GraveyardArea2D" and evil and not GameManager.is_brave:
