@@ -10,12 +10,13 @@ config_version=5
 
 [application]
 
-config/name="TimeGame"
-config/version="0.0.1"
+config/name="ChronoPillow"
+config/description="You are trapped in a time loop that kills you after 60 seconds"
+config/version="1.0.0"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

@@ -98,6 +98,7 @@ node_b = NodePath("..")
 position = Vector2(93, -66)
 collision_layer = 2
 collision_mask = 2
+freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Timer/GravityOverride/GodEntity"]
 scale = Vector2(4, 4)
