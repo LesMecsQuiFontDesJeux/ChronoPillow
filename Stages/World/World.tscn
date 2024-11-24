@@ -1,13 +1,17 @@
-[gd_scene load_steps=35 format=4 uid="uid://da8gx1ocm6ubj"]
+[gd_scene load_steps=37 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
+[ext_resource type="PackedScene" uid="uid://d0a6kas1x5ntx" path="res://UI/HUD/Timer/Timer.tscn" id="2_5bl77"]
 [ext_resource type="PackedScene" uid="uid://dygfjnesoes6g" path="res://Entities/Player/Player.tscn" id="2_hpqvq"]
 [ext_resource type="Script" path="res://Stages/World/WaterNode.gd" id="4_v14f4"]
 [ext_resource type="PackedScene" uid="uid://dx1n8xwv7iwhi" path="res://Entities/NPCs/Bouhtade/Bouhtade.tscn" id="5_1dsgm"]
 [ext_resource type="PackedScene" uid="uid://budpcbklr8o1v" path="res://Entities/Pillow/Pillow.tscn" id="5_s4xbx"]
 [ext_resource type="PackedScene" uid="uid://bxhvfxyunv8my" path="res://UI/Transitions/CircularFadeInOut.tscn" id="6_0bawl"]
 [ext_resource type="PackedScene" uid="uid://bvnv4npmrkv78" path="res://Entities/Items/Bucket/Bucket.tscn" id="7_6y6xp"]
+[ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="7_etmpj"]
+[ext_resource type="PackedScene" uid="uid://b3jo15agvcst6" path="res://Entities/Items/Rat/Rat.tscn" id="8_go3jy"]
+[ext_resource type="PackedScene" uid="uid://di8qy7m6otn4p" path="res://Entities/Cauldron/Cauldron.tscn" id="9_2kxtp"]
 [ext_resource type="PackedScene" uid="uid://dxdxlm1t4fix7" path="res://Entities/Items/Potion/Potion.tscn" id="9_nh1if"]
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 
@@ -321,6 +325,10 @@ position = Vector2(651, 559)
 
 [node name="Bucket" parent="." instance=ExtResource("7_6y6xp")]
 position = Vector2(689, 549)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Timer" parent="HUD" instance=ExtResource("2_5bl77")]
 
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
