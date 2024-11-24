@@ -13,3 +13,5 @@ func on_interact() -> void:
 		$ExplosionCPUParticles2D.emitting = true
 		$Sprite2D.visible = false
 		await get_tree().get_first_node_in_group("timer").blow_up_rope()
+		await get_tree().create_timer(2.0).timeout
+		call_deferred("free")

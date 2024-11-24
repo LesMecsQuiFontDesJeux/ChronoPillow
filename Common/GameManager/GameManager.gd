@@ -4,13 +4,7 @@ var time_manager: TimeManager
 var day: int = 0
 var stored_item_name = null
 var is_brave: bool = false
-
-const TARGET_WIDTH: float = 1280.0
-const TARGET_HEIGHT: float = 720.0
-const BASE_ZOOM = 4
-
-var scale_ratio: float = 1.0
-
+var has_stopped_timer: bool = false
 func _ready() -> void:
 	set_physics_process(false)
 	time_manager = TimeManager.new()
@@ -40,8 +34,6 @@ func start_day(first_day: bool = false) -> void:
 	call_deferred("setup_time_manager", world.get_player())
 	call_deferred("set_physics_process", true)
 
-	call_deferred("zoom_to_fit")
-
 func end_day(player_died: bool = false) -> void:
 	var world: World = get_node("/root/World")
 	var player: Player = world.get_player()
@@ -66,14 +58,3 @@ func _physics_process(_delta):
 	if world == null:
 		return
 	world.update_lighting(time_manager.get_day_state())
-	zoom_to_fit()
-
-func zoom_to_fit() -> void:
-	var viewport_size = get_viewport().size
-	var width_ratio: float = viewport_size.x / TARGET_WIDTH
-	var height_ratio: float = viewport_size.y / TARGET_HEIGHT
-	scale_ratio = min(width_ratio, height_ratio)
-	
-	var camera: Camera2D = get_viewport().get_camera_2d()
-	if camera != null:
-		camera.zoom = Vector2(BASE_ZOOM * scale_ratio, BASE_ZOOM * scale_ratio)
