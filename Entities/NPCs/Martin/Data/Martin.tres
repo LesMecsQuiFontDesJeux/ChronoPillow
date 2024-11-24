@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://vksiexx8rsih"]
+
+[ext_resource type="Texture2D" uid="uid://4i5hosjbhfri" path="res://Entities/NPCs/Martin/Art/jpp4ulsw.bmp" id="1_58x0i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l360l"]
+atlas = ExtResource("1_58x0i")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85rjj"]
+atlas = ExtResource("1_58x0i")
+region = Rect2(25, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnhnj"]
+atlas = ExtResource("1_58x0i")
+region = Rect2(50, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tueec"]
+atlas = ExtResource("1_58x0i")
+region = Rect2(75, 0, 25, 25)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l360l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85rjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnhnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tueec")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
