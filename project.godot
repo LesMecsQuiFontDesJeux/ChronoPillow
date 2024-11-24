@@ -41,6 +41,7 @@ naming/script_name_casing=1
 
 timer=""
 breaking_joint=""
+god=""
 
 [input]
 
