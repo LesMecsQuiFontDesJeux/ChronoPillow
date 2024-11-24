@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://dwhip5qchlksw"]
+[gd_scene load_steps=41 format=4 uid="uid://dwhip5qchlksw"]
 
 [ext_resource type="Script" path="res://Stages/World/World.gd" id="1_6nnoi"]
 [ext_resource type="TileSet" uid="uid://bx4f77xdlnfie" path="res://Stages/Tilesets/Tilesets.tres" id="1_j7ssu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bgnypplbjucxj" path="res://Entities/NPCs/Art/DialogBubble.tscn" id="3_nrn3g"]
 [ext_resource type="Script" path="res://Stages/World/WaterNode.gd" id="4_v14f4"]
 [ext_resource type="PackedScene" uid="uid://dx1n8xwv7iwhi" path="res://Entities/NPCs/Bouhtade/Bouhtade.tscn" id="5_1dsgm"]
+[ext_resource type="PackedScene" uid="uid://burty3lmw7lbc" path="res://Entities/Items/Letter/LetterPopup.tscn" id="5_pvwrv"]
 [ext_resource type="PackedScene" uid="uid://budpcbklr8o1v" path="res://Entities/Pillow/Pillow.tscn" id="5_s4xbx"]
 [ext_resource type="PackedScene" uid="uid://bxhvfxyunv8my" path="res://UI/Transitions/CircularFadeInOut.tscn" id="6_0bawl"]
 [ext_resource type="PackedScene" uid="uid://bvnv4npmrkv78" path="res://Entities/Items/Bucket/Bucket.tscn" id="7_6y6xp"]
@@ -110,6 +111,13 @@ offset_left = 850.0
 offset_top = 50.0
 offset_right = 1010.0
 offset_bottom = 370.0
+
+[node name="LetterPopup" parent="HUD" instance=ExtResource("5_pvwrv")]
+visible = false
+offset_left = -0.122925
+offset_top = -0.165009
+offset_right = -0.122925
+offset_bottom = -0.165009
 
 [node name="Transitions" type="CanvasLayer" parent="."]
 
@@ -364,5 +372,5 @@ position = Vector2(1416, 1276)
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveInsideDoorArea2D" to="." method="_on_cave_exit"]
-[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_cave_enter"]
+[connection signal="body_entered" from="CaveOutsideDoorArea2D2" to="." method="_on_house_outside_door_area_2d_body_entered"]

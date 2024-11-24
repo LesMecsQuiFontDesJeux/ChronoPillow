@@ -30,7 +30,8 @@ func start_day(first_day: bool = false) -> void:
 		player.place_on_head(lantern)
 
 	if first_day:
-		#pillow.set_stored_item_name("")
+		pillow.set_stored_item_name("Letter")
+		# pillow.retrieve_item()
 		pass
 		
 	if not first_day and stored_item_name != null:
