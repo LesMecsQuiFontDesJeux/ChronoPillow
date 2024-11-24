@@ -4,7 +4,7 @@ var fused: bool = false
 func on_interact() -> void:
 	var player: Player = get_tree().get_first_node_in_group("player")
 
-	if player.get_head_item() is Lantern:
+	if player.get_item_on_head() is Lantern:
 		fused = true
 		print("Bomb has been fused")
 		$FuseCPUParticles2D.emitting = true

@@ -13,8 +13,10 @@ var idle = true
 var can_move = true
 
 enum PlayerLocation {
+	House,
 	Plain,
-	Graveyard
+	Graveyard,
+	Cave
 }
 
 var z_index_item_slot: Dictionary = {
@@ -184,6 +186,31 @@ func die_from_bouhtade():
 	particles.emitting = true
 	emit_signal("died")
 
+func die():
+	can_move = false
+	rotation_degrees = -90
+	var particles: CPUParticles2D = $BloodCPUParticles2D
+	particles.emitting = true
+	emit_signal("died")
+
+func die_from_lightning():
+	can_move = false
+	var world = get_node("/root/World")
+	var lightning: AnimatedSprite2D = $Lightning
+	lightning.visible = true
+	lightning.speed_scale = 2
+	lightning.play("default")
+	var sun: DirectionalLight2D = world.get_node("Sun")
+	sun.color = GameManager.time_manager.DAY_COLOR
+	sun.energy = 16
+	await get_tree().create_timer(0.25).timeout
+	rotation_degrees = -90
+	sun.color = GameManager.time_manager.NIGHT_COLOR
+	sun.energy = 1
+	var particles: CPUParticles2D = $BloodCPUParticles2D
+	particles.emitting = true
+	emit_signal("died")
+
 func place_on_head(item: Item):
 	item.reparent($HeadSlot)
 	item.position = Vector2.ZERO
@@ -193,22 +220,40 @@ func place_on_head(item: Item):
 	item.on_pickup()
 	picked_up_item = null
 
-func get_head_item() -> Item:
-	return $HeadSlot.get_child(0)
+func get_item_on_head():
+	if $HeadSlot.get_child_count() > 0:
+		return $HeadSlot.get_child(0)
+	else:
+		return null
+
 func _on_feet_area_2d_area_exited(area: Area2D) -> void:
 	var world = get_node("/root/World")
 	if world == null:
 		return
-	var bouhtade: Bouhtade = world.get_npcs_by_name("Bouhtade")
+	
 	if area.name == "GraveyardArea2D":
 		player_location = PlayerLocation.Plain
+		var bouhtade: Bouhtade = world.get_npcs_by_name("Bouhtade")
 		if not GameManager.is_brave:
 			bouhtade.disable_unable_player_to_enter_target_mode()
-	elif area.name == "PlainArea2D":
+
+	if area.name == "CaveArea2D":
+		player_location = PlayerLocation.Plain
+
+func _on_feet_area_2d_area_entered(area: Area2D) -> void:
+	var world = get_node("/root/World")
+	if world == null:
+		return
+
+	if area.name == "GraveyardArea2D":
+		var bouhtade: Bouhtade = world.get_npcs_by_name("Bouhtade")
 		bouhtade.in_graveyard = true
 		player_location = PlayerLocation.Graveyard
 		if not GameManager.is_brave:
 			bouhtade.unable_player_to_enter_target_mode()
 		else:
 			for child in world.get_node("GraveyardStaticBody2D").get_children():
-				child.call_deferred("set_disabled", true)
+				child.call_deferred("free")
+
+	if area.name == "CaveArea2D":
+		player_location = PlayerLocation.Cave

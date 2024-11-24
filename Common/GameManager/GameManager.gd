@@ -5,6 +5,8 @@ var day: int = 0
 var stored_item_name = null
 var is_brave: bool = false
 var has_stopped_timer: bool = false
+var has_lantern: bool = false
+
 func _ready() -> void:
 	set_physics_process(false)
 	time_manager = TimeManager.new()
@@ -20,6 +22,11 @@ func start_day(first_day: bool = false) -> void:
 	var new_world: PackedScene = preload("res://Stages/World/World.tscn")
 	var world: World = new_world.instantiate()
 	var pillow: Pillow = world.get_pillow()
+	var player: Player = world.get_player()
+
+	if has_lantern:
+		var lantern: Item = load("res://Entities/Items/Lantern/Lantern.tscn").instantiate()
+		player.place_on_head(lantern)
 
 	if first_day:
 		#pillow.set_stored_item_name("")
@@ -34,18 +41,12 @@ func start_day(first_day: bool = false) -> void:
 	call_deferred("setup_time_manager", world.get_player())
 	call_deferred("set_physics_process", true)
 
-func end_day(player_died: bool = false) -> void:
+func end_day() -> void:
 	var world: World = get_node("/root/World")
 	var player: Player = world.get_player()
 	var pillow: Pillow = world.get_pillow()
-
-	# if player.is_in_group("brave") and not is_brave:
-	# 	is_brave = true
 	
-	if not player_died:
-		stored_item_name = pillow.get_stored_item_name()
-	else:
-		stored_item_name = pillow.get_last_item()
+	stored_item_name = pillow.get_stored_item_name()
 
 	set_physics_process(false)
 	world.call_deferred("free")

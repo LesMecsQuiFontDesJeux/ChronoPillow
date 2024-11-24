@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgnypplbjucxj"]
+[gd_scene load_steps=5 format=3 uid="uid://bgnypplbjucxj"]
 
 [ext_resource type="Texture2D" uid="uid://dbu2q3u4n52be" path="res://Entities/NPCs/Art/DialogBubble.png" id="1_gj30h"]
 [ext_resource type="FontFile" uid="uid://dgcf0b68l8ks6" path="res://Assets/Fonts/RoTwimchRegular-WyR3n.ttf" id="2_dvnca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_batjf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qys"]
 bg_color = Color(0.286275, 0.160784, 0.137255, 1)
@@ -9,31 +11,48 @@ draw_center = false
 border_width_bottom = 4
 border_color = Color(0.286275, 0.160784, 0.137255, 1)
 
-[node name="DialogBubble" type="Sprite2D"]
+[node name="DialogBubble" type="TextureRect"]
 z_index = 10
-scale = Vector2(0.7, 0.7)
+offset_right = 160.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 8
 texture = ExtResource("1_gj30h")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -70.0
-offset_top = -113.0
-offset_right = 70.0
-offset_bottom = 143.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 160.0
+offset_bottom = 320.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_batjf")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_dvnca")
+theme_override_styles/normal = SubResource("StyleBoxFlat_57qys")
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_batjf")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_constants/line_separation = 4
 theme_override_fonts/normal_font = ExtResource("2_dvnca")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
-
-[node name="Label" type="Label" parent="."]
-offset_left = -77.1429
-offset_top = -150.0
-offset_right = 74.8571
-offset_bottom = -127.0
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("2_dvnca")
-theme_override_styles/normal = SubResource("StyleBoxFlat_57qys")
-horizontal_alignment = 1
