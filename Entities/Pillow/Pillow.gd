@@ -8,12 +8,16 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var item_slot: Node2D = $ItemSlot
 var stored_item_name = null
+var last_item = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
 func get_stored_item_name():
 	return stored_item_name
+
+func get_last_item():
+	return last_item
 
 func set_stored_item_name(item_name: String):
 	stored_item_name = item_name
@@ -53,6 +57,7 @@ func retrieve_item() -> Item:
 	var item: Item = scene.instantiate()
 	item.in_cave = true
 	item_slot.add_child(item)
+	last_item = item
 	stored_item_name = null
 	return item
 

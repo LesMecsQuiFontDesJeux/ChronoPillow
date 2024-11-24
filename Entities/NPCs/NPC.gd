@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var dialog_progress: float = 0
 var dialog_indicator_sprite: AnimatedSprite2D
-var dialog_window: Control
+var dialog_window: Sprite2D
 var player: Player
 var world: World
 
@@ -34,7 +34,9 @@ func _create_dialog_indicator() -> void:
 	add_child(dialog_indicator)
 
 func _create_dialog_window() -> void:
-	pass
+	dialog_window = load("res://Entities/NPCs/Art/DialogBubble.tscn").instantiate()
+	dialog_window.visible = false
+	add_child(dialog_window)
 
 func move(move_velocity: Vector2) -> void:
 	velocity = move_velocity
@@ -66,6 +68,10 @@ func play_animation(animation_name: String) -> void:
 	else:
 		animated_sprite.play("default")
 
+func on_interact() -> void:
+	player.can_move = false
+	show_dialog()
+
 func show_dialog() -> void:
 	
 	var formatted_dialog_key: String = "KEY_" + npc_name + "_" + str(dialog_progress)
@@ -81,23 +87,34 @@ func show_dialog() -> void:
 	dialog_indicator_sprite.set_visible(false)
 	_shift_camera_left()
 
-	print(dialog)
+	dialog_window.position = Vector2(120 * GameManager.scale_ratio, 0)
+	dialog_window.get_node("Label").text = npc_name
+	dialog_window.visible = true
+	
+	var rich_text_label: RichTextLabel = dialog_window.get_node("RichTextLabel")
+	for i in range(dialog.length()):
+					rich_text_label.text += dialog[i]
+					await get_tree().create_timer(0.025).timeout
 
-func on_interact() -> void:
-	show_dialog()
+	await get_tree().create_timer(2.0).timeout
+	_shift_camera_reset()
+	dialog_window.visible = false
+	rich_text_label.text = ""
+	dialog_indicator_sprite.set_visible(true)
+	player.can_move = true
 	
 func _shift_camera_left() -> void:
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var tween: Tween = get_tree().create_tween()
 
-	var offset: Vector2 = Vector2(camera.offset.x + get_viewport().size.x / 12, camera.offset.y)
-	tween.tween_property(camera, "offset", offset, 1.0)
+	var offset: Vector2 = Vector2(camera.offset.x + get_viewport().size.x / 17 / GameManager.scale_ratio, camera.offset.y)
+	tween.tween_property(camera, "offset", offset, 0.25)
 	tween.play()
 
-func _shift_camera_right() -> void:
+func _shift_camera_reset() -> void:
 	var camera: Camera2D = get_viewport().get_camera_2d()
 	var tween: Tween = get_tree().create_tween()
 
-	var offset: Vector2 = Vector2(camera.offset.x - get_viewport().size.x / 12, camera.offset.y)
-	tween.tween_property(camera, "offset", offset, 1.0)
+	var offset: Vector2 = Vector2.ZERO
+	tween.tween_property(camera, "offset", offset, 0.25)
 	tween.play()
