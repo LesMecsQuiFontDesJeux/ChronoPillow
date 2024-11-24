@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://di8qy7m6otn4p"]
+[gd_scene load_steps=5 format=3 uid="uid://di8qy7m6otn4p"]
 
 [ext_resource type="Script" path="res://Entities/Cauldron/Cauldron.gd" id="1_gcc6o"]
-[ext_resource type="SpriteFrames" path="res://Entities/Cauldron/Data/Cauldron.tres" id="2_3vsw8"]
+[ext_resource type="SpriteFrames" uid="uid://c44fxcky12e5p" path="res://Entities/Cauldron/Data/Cauldron.tres" id="2_3vsw8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltrqx"]
 radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8spca"]
+radius = 16.0
 
 [node name="Cauldron" type="Node2D"]
 script = ExtResource("1_gcc6o")
@@ -32,3 +35,9 @@ skew = 0.012284
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ltrqx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_8spca")

@@ -2,25 +2,28 @@ class_name Cauldron
 extends Node2D
 
 const items = ["Rat", "Mushroom", "Bucket"]
-var item_count: int = 0
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
 @onready var ratSlot: Node2D = $RatSlot
 @onready var mushroomSlot: Node2D = $MushroomSlot
 @onready var bucketSlot: Node2D = $BucketSlot
 
+var full: bool = false
+
 func on_interact():
 	"""
 		When the player interacts with the cauldron.
 	"""
 	print("Interacting with the cauldron")
-	if item_count == 3:
+	if full:
 		print("Cauldron is full, creating potion")
 		var potion_scene: PackedScene = ResourceLoader.load("res://Entities/Items/Potion/Potion.tscn")
 		var potion: Potion = potion_scene.instantiate()
 		potion.add_to_group("items")
 		get_parent().add_child(potion)
 		potion.global_position = global_position + Vector2(0, -20)
+		var world: World = get_node("/root/World")
+		world.get_npcs_by_name("Meowgician").show_dialog("KEY_Meowgician_BraveryPotionCooked")
 		return
 	var player: Player = get_tree().get_nodes_in_group("player")[0]
 	if player.has_item():
@@ -35,8 +38,7 @@ func on_interact():
 			item.position = Vector2.ZERO
 			item.scale = item.scale / 2
 			item.add_to_group("held")
-			item_count += 1
-			if item_count == 3:
+			if _all_slots_filled():
 				print("Cauldron is full")
 				# Show an animation where all items are joining together in the cauldron
 				play_cauldron_animation([ratSlot, mushroomSlot, bucketSlot])
@@ -55,10 +57,10 @@ func play_cauldron_animation(items_in_cauldron):
 	:param items_in_cauldron: List of items added to the cauldron.
 	"""
 	var tween: Tween = get_tree().create_tween()
-	tween.stop()        # Stop any ongoing animations to avoid conflicts
+	tween.stop() # Stop any ongoing animations to avoid conflicts
 
 	for item in items_in_cauldron:
-		var end_position = Vector2(0, 0)  # Cauldron's center, relative to the cauldron's node
+		var end_position = Vector2(0, 0) # Cauldron's center, relative to the cauldron's node
 
 		# Animate position
 		tween.tween_property(
@@ -85,3 +87,10 @@ func _on_cauldron_animation_complete():
 		particles.emitting = true
 	
 	sprite.animation = "full"
+
+func _all_slots_filled():
+	var rat: bool = ratSlot.get_children().size() > 0
+	var mushroom: bool = mushroomSlot.get_children().size() > 0
+	var bucket: bool = bucketSlot.get_children().size() > 0
+	full = rat and mushroom and bucket
+	return rat and mushroom and bucket
