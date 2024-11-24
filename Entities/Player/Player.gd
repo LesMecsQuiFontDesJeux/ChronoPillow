@@ -126,10 +126,10 @@ func check_for_interactable(group: String = ""):
 		# Check if the body is in the specified group, or skip filtering if group is empty
 		if (group == "" or body.get_parent().is_in_group(group)) and body.has_method("get_global_position"):
 			if body.get_parent():
-				if body.get_parent().is_in_group("held"):
+				if body.get_parent().is_in_group("held") or body.get_parent().is_in_group("unpickable"):
 					continue
 				if body.get_parent().get_parent():
-					if body.get_parent().get_parent().is_in_group("held"):
+					if body.get_parent().get_parent().is_in_group("held") or body.get_parent().get_parent().is_in_group("unpickable"):
 						continue
 			var distance = global_position.distance_to(body.get_global_position())
 			if closest_body == null or distance < closest_distance:
@@ -192,3 +192,12 @@ func die_from_bouhtade():
 	var particles: CPUParticles2D = $BloodCPUParticles2D
 	particles.emitting = true
 	emit_signal("died")
+
+func place_on_head(item: Item):
+	item.reparent($HeadSlot)
+	item.position = Vector2.ZERO
+	item.add_to_group("held")
+	item.add_to_group("unpickable")
+	item.remove_from_group("interactable_held")
+	item.on_pickup()
+	picked_up_item = null
