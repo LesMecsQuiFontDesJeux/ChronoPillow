@@ -48,7 +48,6 @@ func play_animation(animation_name: String, stop: bool = false):
 		animated_sprite.stop()
 
 func start_idle():
-	print("Starting idle")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down", true)
@@ -67,7 +66,6 @@ func start_idle():
 			item_slot.position = Vector2(8, 0)
 			item_slot.z_index = 1
 func start_walk():
-	print("Starting walk")
 	match facing:
 		Vector2.DOWN, Vector2(-1, 1), Vector2(1, 1): # Down and diagonal down
 			play_animation("walk_down")

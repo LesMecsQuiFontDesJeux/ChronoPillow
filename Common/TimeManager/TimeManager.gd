@@ -61,7 +61,7 @@ func resume_day() -> void:
 	timer.set_paused(false)
 
 func get_day_state() -> TimeOfDay:
-	if timer.is_stopped():
+	if timer.paused:
 		return TimeOfDay.Paused
 	
 	var time: float = FULL_DAY_LENGTH - timer.get_time_left()

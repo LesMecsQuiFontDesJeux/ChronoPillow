@@ -1,0 +1,140 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0a6kas1x5ntx"]
+
+[ext_resource type="Script" path="res://UI/HUD/Timer/Timer.gd" id="1_gnorl"]
+[ext_resource type="Texture2D" uid="uid://drotr75a21h1w" path="res://UI/HUD/Timer/Art/TimerPlaying.png" id="1_hdofh"]
+[ext_resource type="FontFile" uid="uid://dgcf0b68l8ks6" path="res://Assets/Fonts/RoTwimchRegular-WyR3n.ttf" id="2_um1ua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ah3mg"]
+size = Vector2(234, 118.938)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j3ji6"]
+b = Vector2(0, 24)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wofwn"]
+radius = 20.0
+height = 98.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_re64k"]
+normal = Vector2(0, 1)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Timer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_right = 97.0
+offset_bottom = 107.0
+grow_horizontal = 2
+script = ExtResource("1_gnorl")
+
+[node name="GravityOverride" type="Area2D" parent="Timer"]
+collision_layer = 2
+collision_mask = 2
+gravity_space_override = 3
+
+[node name="GravityOverrideCollision" type="CollisionShape2D" parent="Timer/GravityOverride"]
+position = Vector2(89, 50.5313)
+shape = SubResource("RectangleShape2D_ah3mg")
+
+[node name="LeftRope" type="RigidBody2D" parent="Timer/GravityOverride"]
+position = Vector2(30, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Rope" type="Line2D" parent="Timer/GravityOverride/LeftRope"]
+points = PackedVector2Array(20, 24, 20, 0)
+width = 1.0
+default_color = Color(0.286275, 0.160784, 0.137255, 1)
+
+[node name="LR_T" type="PinJoint2D" parent="Timer/GravityOverride/LeftRope"]
+position = Vector2(20, 24)
+node_a = NodePath("..")
+node_b = NodePath("../../Timer")
+
+[node name="LR_A" type="PinJoint2D" parent="Timer/GravityOverride/LeftRope"]
+position = Vector2(20, 0)
+node_a = NodePath("../../../Anchor")
+node_b = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/GravityOverride/LeftRope"]
+position = Vector2(20, 0)
+shape = SubResource("SegmentShape2D_j3ji6")
+
+[node name="RightRope" type="RigidBody2D" parent="Timer/GravityOverride"]
+position = Vector2(148, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Rope" type="Line2D" parent="Timer/GravityOverride/RightRope"]
+points = PackedVector2Array(0, 24, 0, 0)
+width = 1.0
+default_color = Color(0.286275, 0.160784, 0.137255, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/GravityOverride/RightRope"]
+shape = SubResource("SegmentShape2D_j3ji6")
+
+[node name="RR_A" type="PinJoint2D" parent="Timer/GravityOverride/RightRope"]
+node_a = NodePath("../../../Anchor")
+node_b = NodePath("..")
+
+[node name="RR_T" type="PinJoint2D" parent="Timer/GravityOverride/RightRope"]
+position = Vector2(0, 24)
+node_a = NodePath("../../Timer")
+node_b = NodePath("..")
+
+[node name="Timer" type="RigidBody2D" parent="Timer/GravityOverride"]
+position = Vector2(0, 8)
+collision_layer = 2
+collision_mask = 2
+
+[node name="TextureRect" type="TextureRect" parent="Timer/GravityOverride/Timer"]
+offset_right = 96.0
+offset_bottom = 48.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_hdofh")
+
+[node name="Label" type="Label" parent="Timer/GravityOverride/Timer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.365
+anchor_top = 0.594
+anchor_right = 0.365
+anchor_bottom = 0.594
+offset_left = -19.04
+offset_top = -10.512
+offset_right = 20.96
+offset_bottom = 16.488
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.286275, 0.160784, 0.137255, 1)
+theme_override_fonts/font = ExtResource("2_um1ua")
+theme_override_font_sizes/font_size = 26
+text = "69"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/GravityOverride/Timer"]
+position = Vector2(97, 56)
+rotation = 1.5708
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_wofwn")
+
+[node name="Anchor" type="RigidBody2D" parent="Timer"]
+position = Vector2(94, 0)
+collision_layer = 2
+collision_mask = 2
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Anchor"]
+shape = SubResource("WorldBoundaryShape2D_re64k")
