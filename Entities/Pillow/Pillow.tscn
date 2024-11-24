@@ -3,20 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://cda6f65eoalgt" path="res://Entities/Pillow/Art/Pillow.png" id="1_x4g73"]
 [ext_resource type="Script" path="res://Entities/Pillow/Pillow.gd" id="1_y7p3i"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y5ad3"]
-radius = 24.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wrno"]
+size = Vector2(20, 25)
 
 [node name="Pillow" type="Node2D" groups=["pillow"]]
+z_index = -4
 script = ExtResource("1_y7p3i")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-rotation = -0.00238
-shape = SubResource("CircleShape2D_y5ad3")
+position = Vector2(10, 2.5)
+shape = SubResource("RectangleShape2D_1wrno")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.02, 0.02)
 texture = ExtResource("1_x4g73")
 
 [node name="ItemSlot" type="Node2D" parent="."]

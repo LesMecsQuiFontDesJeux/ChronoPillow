@@ -45,7 +45,7 @@ func on_player_died() -> void:
 	await get_tree().create_timer(0.5).timeout
 	world.circular_fade_out()
 	await get_tree().create_timer(1.0).timeout
-	GameManager.end_day(true)
+	GameManager.end_day()
 
 func start_day() -> void:
 	timer.set_wait_time(FULL_DAY_LENGTH)

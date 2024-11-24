@@ -51,6 +51,7 @@ func store_item(item: Item):
 func retrieve_item() -> Item:
 	var scene: PackedScene = ResourceLoader.load("res://Entities/Items/" + stored_item_name + "/" + stored_item_name + ".tscn")
 	var item: Item = scene.instantiate()
+	item.in_cave = true
 	item_slot.add_child(item)
 	stored_item_name = null
 	return item

@@ -40,6 +40,7 @@ func _on_house_outside_door_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		$HouseOutsideDoorArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$HouseInsideDoorArea2D/CollisionShape2D.set_deferred("disabled", false)
+		_set_items_visibility(body, true)
 		_set_layers_visibility_and_collision(overworld_layers, false)
 		_set_layers_visibility_and_collision(cave_layers, true)
 	else:
@@ -50,14 +51,29 @@ func _on_house_inside_door_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		$HouseInsideDoorArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$HouseOutsideDoorArea2D/CollisionShape2D.set_deferred("disabled", false)
+		_set_items_visibility(body, false)
 		_set_layers_visibility_and_collision(overworld_layers, true)
 		_set_layers_visibility_and_collision(cave_layers, false)
 	else:
 		_set_layers_visibility_and_collision(overworld_layers, false)
 		_set_layers_visibility_and_collision(cave_layers, true)
-	pass
 
 func _set_layers_visibility_and_collision(layers: Array, enabled: bool) -> void:
 	for layer in layers:
 		layer.visible = enabled
 		layer.collision_enabled = enabled
+
+func _set_items_visibility(body: Player, in_cave: bool) -> void:
+	var item: Item = body.get_item()
+	if item != null:
+		item.in_cave = in_cave
+		if in_cave:
+			body.z_index_item_slot.merge({"down": 4}, true)
+		else:
+			body.z_index_item_slot.merge({"down": 1}, true)
+
+	for tree_item in get_tree().get_nodes_in_group("items"):
+		if tree_item.in_cave:
+			tree_item.visible = in_cave
+		else:
+			tree_item.visible = !in_cave
