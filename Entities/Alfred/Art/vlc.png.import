@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bf51tpaf7y325"
-path="res://.godot/imported/vlc.png-0f4bb4810b72e7783eec3df05d533e01.ctex"
+path="res://.godot/imported/vlc.png-348ac0e0532a2e8932c3204de6b74153.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/God/Art/vlc.png"
-dest_files=["res://.godot/imported/vlc.png-0f4bb4810b72e7783eec3df05d533e01.ctex"]
+source_file="res://Entities/Alfred/Art/vlc.png"
+dest_files=["res://.godot/imported/vlc.png-348ac0e0532a2e8932c3204de6b74153.ctex"]
 
 [params]
 

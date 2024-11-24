@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://budpcbklr8o1v" path="res://Entities/Pillow/Pillow.tscn" id="5_s4xbx"]
 [ext_resource type="PackedScene" uid="uid://bxhvfxyunv8my" path="res://UI/Transitions/CircularFadeInOut.tscn" id="6_0bawl"]
 [ext_resource type="PackedScene" uid="uid://bvnv4npmrkv78" path="res://Entities/Items/Bucket/Bucket.tscn" id="7_6y6xp"]
+[ext_resource type="PackedScene" uid="uid://s33apj7dm6pe" path="res://Entities/Items/Lantern/Lantern.tscn" id="12_1xvfg"]
 [ext_resource type="PackedScene" uid="uid://dkdso4bfo5isy" path="res://Entities/Items/Spirit/Spirit.tscn" id="12_nwyy2"]
 [ext_resource type="PackedScene" uid="uid://di8qy7m6otn4p" path="res://Entities/Cauldron/Cauldron.tscn" id="13_on7oi"]
 [ext_resource type="PackedScene" uid="uid://ch4fawsm4fem8" path="res://Entities/Items/Mushroom/Mushroom.tscn" id="14_stmjq"]
@@ -367,6 +368,9 @@ position = Vector2(636, 1329)
 [node name="Ladder" parent="." instance=ExtResource("15_48k3a")]
 z_index = -6
 position = Vector2(1416, 1276)
+
+[node name="Lantern" parent="." instance=ExtResource("12_1xvfg")]
+position = Vector2(712, 611)
 
 [connection signal="body_entered" from="HouseOutsideDoorArea2D" to="." method="_on_house_outside_door_area_2d_body_entered"]
 [connection signal="body_entered" from="HouseInsideDoorArea2D" to="." method="_on_house_inside_door_area_2d_body_entered"]

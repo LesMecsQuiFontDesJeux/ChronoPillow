@@ -52,6 +52,7 @@ func on_player_died() -> void:
 	GameManager.end_day()
 
 func start_day() -> void:
+	timer.set_paused(false)
 	timer.set_wait_time(FULL_DAY_LENGTH)
 	timer.start()
 
