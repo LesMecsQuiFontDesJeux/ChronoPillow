@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Entities/Pillow/Pillow.gd" id="1_y7p3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wrno"]
-size = Vector2(20, 25)
+size = Vector2(15, 16)
 
 [node name="Pillow" type="Node2D" groups=["pillow"]]
 z_index = -4
@@ -13,7 +13,7 @@ script = ExtResource("1_y7p3i")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(10, 2.5)
+position = Vector2(7.5, 3)
 shape = SubResource("RectangleShape2D_1wrno")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

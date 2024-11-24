@@ -30,15 +30,16 @@ func _on_timer_timeout() -> void:
 
 	var world: World = get_node("/root/World")
 	var player: Player = world.get_player()
-	if player.player_location == player.PlayerLocation.Graveyard:
+	if player.player_location == player.PlayerLocation.House:
+		player.die()
+		return
+	elif player.player_location == player.PlayerLocation.Graveyard:
 		var bouhtade: Bouhtade = world.get_npcs_by_name("Bouhtade")
 		bouhtade.unable_player_target_mode()
 		return
-	# elif ...:
-	# 	...
-	#   return
-	
-	GameManager.end_day()
+	elif player.player_location == player.PlayerLocation.Plain:
+		player.die_from_lightning()
+		return
 
 func on_player_died() -> void:
 	var world: World = get_node("/root/World")
