@@ -28,17 +28,12 @@ func start_day(first_day: bool = false) -> void:
 	var world: World = new_world.instantiate()
 	var pillow: Pillow = world.get_pillow()
 	var player: Player = world.get_player()
-
 	if has_lantern:
 		var lantern: Item = load("res://Entities/Items/Lantern/Lantern.tscn").instantiate()
 		world.add_child(lantern)
 		player.place_on_head(lantern)
 
-	if first_day:
-		pillow.set_stored_item_name("Letter")
-		# pillow.retrieve_item()
-		pass
-		
+
 	if not first_day and stored_item_name != null:
 		pillow.set_stored_item_name(stored_item_name)
 
@@ -47,6 +42,16 @@ func start_day(first_day: bool = false) -> void:
 	world.circular_fade_in()
 	call_deferred("setup_time_manager", world.get_player())
 	call_deferred("set_physics_process", true)
+	if first_day:
+		call_deferred("show_pillow")
+
+func show_pillow():
+	var world: World = get_node("/root/World")
+	var pillow: Pillow = world.get_pillow()
+	pillow.set_stored_item_name("Letter")
+	var item: Item = pillow.retrieve_item()
+	item.position = Vector2.ZERO
+	pillow.sprite.global_position += Vector2(0, 10)
 
 func end_day(win: bool = false) -> void:
 	var world: World = get_node("/root/World")
